@@ -1,0 +1,11 @@
+# https://help.github.com/articles/about-codeowners
+
+* @johnletey
+
+# CODEOWNERS for Europa
+
+/europa-1 @johnletey @mbreithecker
+
+# CODEOWNERS for Korellia
+
+/korellia @mbreithecker
