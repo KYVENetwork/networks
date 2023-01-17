@@ -31,14 +31,6 @@ import (
 	govTypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	// Group
 	groupTypes "github.com/cosmos/cosmos-sdk/x/group"
-	// IBC
-	ibcTypes "github.com/cosmos/ibc-go/v5/modules/core/types"
-	// IBC Fee
-	ibcFeeTypes "github.com/cosmos/ibc-go/v5/modules/apps/29-fee/types"
-	// IBC Transfer
-	ibcTransferTypes "github.com/cosmos/ibc-go/v5/modules/apps/transfer/types"
-	// ICA
-	icaTypes "github.com/cosmos/ibc-go/v5/modules/apps/27-interchain-accounts/types"
 	// Mint
 	mintTypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	// Slashing
@@ -95,10 +87,10 @@ func main() {
 		// TODO(@john): Look into x/upgrade state.
 		// TODO(@john): Look into x/vesting state.
 
-		IBCState:         generateIBCState(),
-		IBCFeeState:      generateIBCFeeState(),
-		IBCTransferState: generateIBCTransferState(),
-		ICAState:         generateICAState(),
+		IBCState:         GenerateIBCState(),
+		IBCFeeState:      GenerateIBCFeeState(),
+		IBCTransferState: GenerateIBCTransferState(),
+		ICAState:         GenerateICAState(),
 	}
 	rawAppState, _ := json.Marshal(appState)
 
@@ -200,16 +192,6 @@ func generateFeeGrantState() []byte {
 	return rawFeeGrantState.Bytes()
 }
 
-// x/feeibc
-func generateIBCFeeState() []byte {
-	ibcFeeState := ibcFeeTypes.DefaultGenesisState()
-
-	var rawIBCFeeState bytes.Buffer
-	_ = marshaler.Marshal(&rawIBCFeeState, ibcFeeState)
-
-	return rawIBCFeeState.Bytes()
-}
-
 // x/genutil
 func generateGenUtilState() []byte {
 	genUtilState := genUtilTypes.DefaultGenesisState()
@@ -238,26 +220,6 @@ func generateGroupState() []byte {
 	_ = marshaler.Marshal(&rawGroupState, groupState)
 
 	return rawGroupState.Bytes()
-}
-
-// x/ibc
-func generateIBCState() []byte {
-	ibcState := ibcTypes.DefaultGenesisState()
-
-	var rawIBCState bytes.Buffer
-	_ = marshaler.Marshal(&rawIBCState, ibcState)
-
-	return rawIBCState.Bytes()
-}
-
-// x/interchainaccounts
-func generateICAState() []byte {
-	icaState := icaTypes.DefaultGenesis()
-
-	var rawICAState bytes.Buffer
-	_ = marshaler.Marshal(&rawICAState, icaState)
-
-	return rawICAState.Bytes()
 }
 
 // x/mint
@@ -292,17 +254,4 @@ func generateStakingState(denom string) []byte {
 	_ = marshaler.Marshal(&rawStakingState, stakingState)
 
 	return rawStakingState.Bytes()
-}
-
-// x/transfer
-func generateIBCTransferState() []byte {
-	ibcTransferState := ibcTransferTypes.DefaultGenesisState()
-
-	ibcTransferState.Params.SendEnabled = false
-	ibcTransferState.Params.ReceiveEnabled = false
-
-	var rawIBCTransferState bytes.Buffer
-	_ = marshaler.Marshal(&rawIBCTransferState, ibcTransferState)
-
-	return rawIBCTransferState.Bytes()
 }
