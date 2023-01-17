@@ -79,6 +79,13 @@
     "feegrant": {
       "allowances": []
     },
+    "feeibc": {
+      "identifiedFees": [],
+      "feeEnabledChannels": [],
+      "registeredPayees": [],
+      "registeredCounterpartyPayees": [],
+      "forwardRelayers": []
+    },
     "genutil": {
       "genTxs": []
     },
@@ -114,6 +121,58 @@
       "proposalSeq": "0",
       "proposals": [],
       "votes": []
+    },
+    "ibc": {
+      "clientGenesis": {
+        "clients": [],
+        "clientsConsensus": [],
+        "clientsMetadata": [],
+        "params": {
+          "allowedClients": [
+            "06-solomachine",
+            "07-tendermint"
+          ]
+        },
+        "createLocalhost": false,
+        "nextClientSequence": "0"
+      },
+      "connectionGenesis": {
+        "connections": [],
+        "clientConnectionPaths": [],
+        "nextConnectionSequence": "0",
+        "params": {
+          "maxExpectedTimePerBlock": "30000000000"
+        }
+      },
+      "channelGenesis": {
+        "channels": [],
+        "acknowledgements": [],
+        "commitments": [],
+        "receipts": [],
+        "sendSequences": [],
+        "recvSequences": [],
+        "ackSequences": [],
+        "nextChannelSequence": "0"
+      }
+    },
+    "interchainaccounts": {
+      "controllerGenesisState": {
+        "activeChannels": [],
+        "interchainAccounts": [],
+        "ports": [],
+        "params": {
+          "controllerEnabled": true
+        }
+      },
+      "hostGenesisState": {
+        "activeChannels": [],
+        "interchainAccounts": [],
+        "port": "icahost",
+        "params": {
+          "hostEnabled": true,
+          "allowMessages": []
+        }
+      }
     },
     "mint": {
       "minter": {
@@ -157,6 +216,14 @@
       "unbondingDelegations": [],
       "redelegations": [],
       "exported": false
+    },
+    "transfer": {
+      "portId": "transfer",
+      "denomTraces": [],
+      "params": {
+        "sendEnabled": false,
+        "receiveEnabled": false
+      }
     },
     "upgrade": null,
     "vesting": null
