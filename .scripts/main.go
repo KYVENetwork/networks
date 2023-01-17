@@ -68,6 +68,9 @@ func main() {
 	denom := flag.String("denom", "ukyve", "")
 	flag.Parse()
 
+	fmt.Println(fmt.Sprintf("🤖 Creating genesis for %s ...", *chainID))
+	fmt.Println(fmt.Sprintf("💰 Using %s as the global denom ...", *denom))
+
 	appState := AppState{
 		AuthState:         generateAuthState(),
 		AuthzState:        generateAuthzState(),
@@ -103,7 +106,11 @@ func main() {
 		AppState:        json.RawMessage(rawAppState),
 	}
 
+	// TODO(@john): Start using the `ValidateAndComplete` function provide.
+
+	// TODO(@john): Catch error when saving.
 	_ = genesis.SaveAs(fmt.Sprintf("../%s/genesis.json", *chainID))
+	fmt.Println("✅ Completed genesis creation!")
 }
 
 // ========== Module Functions ==========
