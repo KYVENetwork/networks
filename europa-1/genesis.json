@@ -22,6 +22,19 @@
   },
   "app_hash": "",
   "app_state": {
+    "auth": {
+      "params": {
+        "maxMemoCharacters": "256",
+        "txSigLimit": "7",
+        "txSizeCostPerByte": "10",
+        "sigVerifyCostEd25519": "590",
+        "sigVerifyCostSecp256k1": "1000"
+      },
+      "accounts": []
+    },
+    "authz": {
+      "authorization": []
+    },
     "bank": {
       "params": {
         "sendEnabled": [],
@@ -30,6 +43,122 @@
       "balances": [],
       "supply": [],
       "denomMetadata": []
-    }
+    },
+    "capability": {
+      "index": "1",
+      "owners": []
+    },
+    "crisis": {
+      "constantFee": {
+        "denom": "stake",
+        "amount": "1000"
+      }
+    },
+    "distribution": {
+      "params": {
+        "communityTax": "0.020000000000000000",
+        "baseProposerReward": "0.010000000000000000",
+        "bonusProposerReward": "0.040000000000000000",
+        "withdrawAddrEnabled": true
+      },
+      "feePool": {
+        "communityPool": []
+      },
+      "delegatorWithdrawInfos": [],
+      "previousProposer": "",
+      "outstandingRewards": [],
+      "validatorAccumulatedCommissions": [],
+      "validatorHistoricalRewards": [],
+      "validatorCurrentRewards": [],
+      "delegatorStartingInfos": [],
+      "validatorSlashEvents": []
+    },
+    "evidence": {
+      "evidence": []
+    },
+    "feegrant": {
+      "allowances": []
+    },
+    "genutil": {
+      "genTxs": []
+    },
+    "gov": {
+      "startingProposalId": "1",
+      "deposits": [],
+      "votes": [],
+      "proposals": [],
+      "depositParams": {
+        "minDeposit": [
+          {
+            "denom": "stake",
+            "amount": "10000000"
+          }
+        ],
+        "maxDepositPeriod": "172800s"
+      },
+      "votingParams": {
+        "votingPeriod": "172800s"
+      },
+      "tallyParams": {
+        "quorum": "0.334000000000000000",
+        "threshold": "0.500000000000000000",
+        "vetoThreshold": "0.334000000000000000"
+      }
+    },
+    "group": {
+      "groupSeq": "0",
+      "groups": [],
+      "groupMembers": [],
+      "groupPolicySeq": "0",
+      "groupPolicies": [],
+      "proposalSeq": "0",
+      "proposals": [],
+      "votes": []
+    },
+    "mint": {
+      "minter": {
+        "inflation": "0.130000000000000000",
+        "annualProvisions": "0.000000000000000000"
+      },
+      "params": {
+        "mintDenom": "tkyve",
+        "inflationRateChange": "0.130000000000000000",
+        "inflationMax": "0.200000000000000000",
+        "inflationMin": "0.070000000000000000",
+        "goalBonded": "0.670000000000000000",
+        "blocksPerYear": "6311520"
+      }
+    },
+    "params": null,
+    "slashing": {
+      "params": {
+        "signedBlocksWindow": "100",
+        "minSignedPerWindow": "0.500000000000000000",
+        "downtimeJailDuration": "600s",
+        "slashFractionDoubleSign": "0.050000000000000000",
+        "slashFractionDowntime": "0.010000000000000000"
+      },
+      "signingInfos": [],
+      "missedBlocks": []
+    },
+    "staking": {
+      "params": {
+        "unbondingTime": "1814400s",
+        "maxValidators": 100,
+        "maxEntries": 7,
+        "historicalEntries": 10000,
+        "bondDenom": "tkyve",
+        "minCommissionRate": "0.000000000000000000"
+      },
+      "lastTotalPower": "0",
+      "lastValidatorPowers": [],
+      "validators": [],
+      "delegations": [],
+      "unbondingDelegations": [],
+      "redelegations": [],
+      "exported": false
+    },
+    "upgrade": null,
+    "vesting": null
   }
 }
