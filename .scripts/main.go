@@ -43,21 +43,28 @@ type AppState struct {
 	AuthState         json.RawMessage `json:"auth"`
 	AuthzState        json.RawMessage `json:"authz"`
 	BankState         json.RawMessage `json:"bank"`
+	BundlesState      json.RawMessage `json:"bundles"`
 	CapabilityState   json.RawMessage `json:"capability"`
 	CrisisState       json.RawMessage `json:"crisis"`
+	DelegationState   json.RawMessage `json:"delegation"`
 	DistributionState json.RawMessage `json:"distribution"`
 	EvidenceState     json.RawMessage `json:"evidence"`
 	FeeGrantState     json.RawMessage `json:"feegrant"`
 	IBCFeeState       json.RawMessage `json:"feeibc"`
 	GenUtilState      json.RawMessage `json:"genutil"`
+	GlobalState       json.RawMessage `json:"global"`
 	GovState          json.RawMessage `json:"gov"`
 	GroupState        json.RawMessage `json:"group"`
 	IBCState          json.RawMessage `json:"ibc"`
 	ICAState          json.RawMessage `json:"interchainaccounts"`
 	MintState         json.RawMessage `json:"mint"`
 	ParamsState       json.RawMessage `json:"params"`
+	PoolState         json.RawMessage `json:"pool"`
+	QueryState        json.RawMessage `json:"query"`
 	SlashingState     json.RawMessage `json:"slashing"`
+	StakersState      json.RawMessage `json:"stakers"`
 	StakingState      json.RawMessage `json:"staking"`
+	TeamState         json.RawMessage `json:"team"`
 	IBCTransferState  json.RawMessage `json:"transfer"`
 	UpgradeState      json.RawMessage `json:"upgrade"`
 	VestingState      json.RawMessage `json:"vesting"`
@@ -94,6 +101,14 @@ func main() {
 		IBCFeeState:      GenerateIBCFeeState(),
 		IBCTransferState: GenerateIBCTransferState(),
 		ICAState:         GenerateICAState(),
+
+		BundlesState:    GenerateBundlesState(),
+		DelegationState: GenerateDelegationState(),
+		GlobalState:     GenerateGlobalState(),
+		PoolState:       GeneratePoolState(),
+		// NOTE: x/query is empty on purpose.
+		StakersState: GenerateStakersState(),
+		TeamState:    GenerateTeamState(),
 	}
 	rawAppState, _ := json.Marshal(appState)
 
@@ -106,7 +121,7 @@ func main() {
 		AppState:        json.RawMessage(rawAppState),
 	}
 
-	// TODO(@john): Start using the `ValidateAndComplete` function provide.
+	// TODO(@john): Start using the `ValidateAndComplete` function provided.
 
 	// TODO(@john): Catch error when saving.
 	_ = genesis.SaveAs(fmt.Sprintf("../%s/genesis.json", *chainID))

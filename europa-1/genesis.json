@@ -44,6 +44,16 @@
       "supply": [],
       "denom_metadata": []
     },
+    "bundles": {
+      "params": {
+        "upload_timeout": "600",
+        "storage_cost": "100000",
+        "network_fee": "0.01",
+        "max_points": "5"
+      },
+      "bundle_proposal_list": [],
+      "finalized_bundle_list": []
+    },
     "capability": {
       "index": "1",
       "owners": []
@@ -53,6 +63,26 @@
         "denom": "stake",
         "amount": "1000"
       }
+    },
+    "delegation": {
+      "params": {
+        "unbonding_delegation_time": "432000",
+        "redelegation_cooldown": "432000",
+        "redelegation_max_amount": "5",
+        "vote_slash": "0.1",
+        "upload_slash": "0.2",
+        "timeout_slash": "0.02"
+      },
+      "delegator_list": [],
+      "delegation_entry_list": [],
+      "delegation_data_list": [],
+      "delegation_slash_list": [],
+      "undelegation_queue_entry_list": [],
+      "queue_state_undelegation": {
+        "low_index": "0",
+        "high_index": "0"
+      },
+      "redelegation_cooldown_list": []
     },
     "distribution": {
       "params": {
@@ -88,6 +118,15 @@
     },
     "genutil": {
       "gen_txs": []
+    },
+    "global": {
+      "params": {
+        "min_gas_price": "0.000000000000000000",
+        "burn_ratio": "0.000000000000000000",
+        "gas_adjustments": [],
+        "gas_refunds": [],
+        "min_initial_deposit_ratio": "0.000000000000000000"
+      }
     },
     "gov": {
       "starting_proposal_id": "1",
@@ -189,6 +228,11 @@
       }
     },
     "params": null,
+    "pool": {
+      "pool_list": [],
+      "pool_count": "0"
+    },
+    "query": null,
     "slashing": {
       "params": {
         "signed_blocks_window": "100",
@@ -199,6 +243,24 @@
       },
       "signing_infos": [],
       "missed_blocks": []
+    },
+    "stakers": {
+      "params": {
+        "commission_change_time": "432000",
+        "leave_pool_time": "432000"
+      },
+      "staker_list": [],
+      "valaccount_list": [],
+      "commission_change_entries": [],
+      "queue_state_commission": {
+        "low_index": "0",
+        "high_index": "0"
+      },
+      "leave_pool_entries": [],
+      "queue_state_leave": {
+        "low_index": "0",
+        "high_index": "0"
+      }
     },
     "staking": {
       "params": {
@@ -216,6 +278,11 @@
       "unbonding_delegations": [],
       "redelegations": [],
       "exported": false
+    },
+    "team": {
+      "params": {},
+      "account_list": [],
+      "account_count": "0"
     },
     "transfer": {
       "port_id": "transfer",
