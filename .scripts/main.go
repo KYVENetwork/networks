@@ -116,7 +116,9 @@ func main() {
 
 // ========== Module Functions ==========
 
-var marshaler = jsonpb.Marshaler{EmitDefaults: true, Indent: "  "}
+var marshaler = jsonpb.Marshaler{
+	EmitDefaults: true, Indent: "  ", OrigName: true,
+}
 
 // x/auth
 func generateAuthState() []byte {

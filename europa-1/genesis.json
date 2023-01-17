@@ -24,11 +24,11 @@
   "app_state": {
     "auth": {
       "params": {
-        "maxMemoCharacters": "256",
-        "txSigLimit": "7",
-        "txSizeCostPerByte": "10",
-        "sigVerifyCostEd25519": "590",
-        "sigVerifyCostSecp256k1": "1000"
+        "max_memo_characters": "256",
+        "tx_sig_limit": "7",
+        "tx_size_cost_per_byte": "10",
+        "sig_verify_cost_ed25519": "590",
+        "sig_verify_cost_secp256k1": "1000"
       },
       "accounts": []
     },
@@ -37,41 +37,41 @@
     },
     "bank": {
       "params": {
-        "sendEnabled": [],
-        "defaultSendEnabled": true
+        "send_enabled": [],
+        "default_send_enabled": true
       },
       "balances": [],
       "supply": [],
-      "denomMetadata": []
+      "denom_metadata": []
     },
     "capability": {
       "index": "1",
       "owners": []
     },
     "crisis": {
-      "constantFee": {
+      "constant_fee": {
         "denom": "stake",
         "amount": "1000"
       }
     },
     "distribution": {
       "params": {
-        "communityTax": "0.020000000000000000",
-        "baseProposerReward": "0.010000000000000000",
-        "bonusProposerReward": "0.040000000000000000",
-        "withdrawAddrEnabled": true
+        "community_tax": "0.020000000000000000",
+        "base_proposer_reward": "0.010000000000000000",
+        "bonus_proposer_reward": "0.040000000000000000",
+        "withdraw_addr_enabled": true
       },
-      "feePool": {
-        "communityPool": []
+      "fee_pool": {
+        "community_pool": []
       },
-      "delegatorWithdrawInfos": [],
-      "previousProposer": "",
-      "outstandingRewards": [],
-      "validatorAccumulatedCommissions": [],
-      "validatorHistoricalRewards": [],
-      "validatorCurrentRewards": [],
-      "delegatorStartingInfos": [],
-      "validatorSlashEvents": []
+      "delegator_withdraw_infos": [],
+      "previous_proposer": "",
+      "outstanding_rewards": [],
+      "validator_accumulated_commissions": [],
+      "validator_historical_rewards": [],
+      "validator_current_rewards": [],
+      "delegator_starting_infos": [],
+      "validator_slash_events": []
     },
     "evidence": {
       "evidence": []
@@ -80,149 +80,149 @@
       "allowances": []
     },
     "feeibc": {
-      "identifiedFees": [],
-      "feeEnabledChannels": [],
-      "registeredPayees": [],
-      "registeredCounterpartyPayees": [],
-      "forwardRelayers": []
+      "identified_fees": [],
+      "fee_enabled_channels": [],
+      "registered_payees": [],
+      "registered_counterparty_payees": [],
+      "forward_relayers": []
     },
     "genutil": {
-      "genTxs": []
+      "gen_txs": []
     },
     "gov": {
-      "startingProposalId": "1",
+      "starting_proposal_id": "1",
       "deposits": [],
       "votes": [],
       "proposals": [],
-      "depositParams": {
-        "minDeposit": [
+      "deposit_params": {
+        "min_deposit": [
           {
             "denom": "stake",
             "amount": "10000000"
           }
         ],
-        "maxDepositPeriod": "172800s"
+        "max_deposit_period": "172800s"
       },
-      "votingParams": {
-        "votingPeriod": "172800s"
+      "voting_params": {
+        "voting_period": "172800s"
       },
-      "tallyParams": {
+      "tally_params": {
         "quorum": "0.334000000000000000",
         "threshold": "0.500000000000000000",
-        "vetoThreshold": "0.334000000000000000"
+        "veto_threshold": "0.334000000000000000"
       }
     },
     "group": {
-      "groupSeq": "0",
+      "group_seq": "0",
       "groups": [],
-      "groupMembers": [],
-      "groupPolicySeq": "0",
-      "groupPolicies": [],
-      "proposalSeq": "0",
+      "group_members": [],
+      "group_policy_seq": "0",
+      "group_policies": [],
+      "proposal_seq": "0",
       "proposals": [],
       "votes": []
     },
     "ibc": {
-      "clientGenesis": {
+      "client_genesis": {
         "clients": [],
-        "clientsConsensus": [],
-        "clientsMetadata": [],
+        "clients_consensus": [],
+        "clients_metadata": [],
         "params": {
-          "allowedClients": [
+          "allowed_clients": [
             "06-solomachine",
             "07-tendermint"
           ]
         },
-        "createLocalhost": false,
-        "nextClientSequence": "0"
+        "create_localhost": false,
+        "next_client_sequence": "0"
       },
-      "connectionGenesis": {
+      "connection_genesis": {
         "connections": [],
-        "clientConnectionPaths": [],
-        "nextConnectionSequence": "0",
+        "client_connection_paths": [],
+        "next_connection_sequence": "0",
         "params": {
-          "maxExpectedTimePerBlock": "30000000000"
+          "max_expected_time_per_block": "30000000000"
         }
       },
-      "channelGenesis": {
+      "channel_genesis": {
         "channels": [],
         "acknowledgements": [],
         "commitments": [],
         "receipts": [],
-        "sendSequences": [],
-        "recvSequences": [],
-        "ackSequences": [],
-        "nextChannelSequence": "0"
+        "send_sequences": [],
+        "recv_sequences": [],
+        "ack_sequences": [],
+        "next_channel_sequence": "0"
       }
     },
     "interchainaccounts": {
-      "controllerGenesisState": {
-        "activeChannels": [],
-        "interchainAccounts": [],
+      "controller_genesis_state": {
+        "active_channels": [],
+        "interchain_accounts": [],
         "ports": [],
         "params": {
-          "controllerEnabled": true
+          "controller_enabled": true
         }
       },
-      "hostGenesisState": {
-        "activeChannels": [],
-        "interchainAccounts": [],
+      "host_genesis_state": {
+        "active_channels": [],
+        "interchain_accounts": [],
         "port": "icahost",
         "params": {
-          "hostEnabled": true,
-          "allowMessages": []
+          "host_enabled": true,
+          "allow_messages": []
         }
       }
     },
     "mint": {
       "minter": {
         "inflation": "0.130000000000000000",
-        "annualProvisions": "0.000000000000000000"
+        "annual_provisions": "0.000000000000000000"
       },
       "params": {
-        "mintDenom": "tkyve",
-        "inflationRateChange": "0.130000000000000000",
-        "inflationMax": "0.200000000000000000",
-        "inflationMin": "0.070000000000000000",
-        "goalBonded": "0.670000000000000000",
-        "blocksPerYear": "6311520"
+        "mint_denom": "tkyve",
+        "inflation_rate_change": "0.130000000000000000",
+        "inflation_max": "0.200000000000000000",
+        "inflation_min": "0.070000000000000000",
+        "goal_bonded": "0.670000000000000000",
+        "blocks_per_year": "6311520"
       }
     },
     "params": null,
     "slashing": {
       "params": {
-        "signedBlocksWindow": "100",
-        "minSignedPerWindow": "0.500000000000000000",
-        "downtimeJailDuration": "600s",
-        "slashFractionDoubleSign": "0.050000000000000000",
-        "slashFractionDowntime": "0.010000000000000000"
+        "signed_blocks_window": "100",
+        "min_signed_per_window": "0.500000000000000000",
+        "downtime_jail_duration": "600s",
+        "slash_fraction_double_sign": "0.050000000000000000",
+        "slash_fraction_downtime": "0.010000000000000000"
       },
-      "signingInfos": [],
-      "missedBlocks": []
+      "signing_infos": [],
+      "missed_blocks": []
     },
     "staking": {
       "params": {
-        "unbondingTime": "1814400s",
-        "maxValidators": 100,
-        "maxEntries": 7,
-        "historicalEntries": 10000,
-        "bondDenom": "tkyve",
-        "minCommissionRate": "0.000000000000000000"
+        "unbonding_time": "1814400s",
+        "max_validators": 100,
+        "max_entries": 7,
+        "historical_entries": 10000,
+        "bond_denom": "tkyve",
+        "min_commission_rate": "0.000000000000000000"
       },
-      "lastTotalPower": "0",
-      "lastValidatorPowers": [],
+      "last_total_power": "0",
+      "last_validator_powers": [],
       "validators": [],
       "delegations": [],
-      "unbondingDelegations": [],
+      "unbonding_delegations": [],
       "redelegations": [],
       "exported": false
     },
     "transfer": {
-      "portId": "transfer",
-      "denomTraces": [],
+      "port_id": "transfer",
+      "denom_traces": [],
       "params": {
-        "sendEnabled": false,
-        "receiveEnabled": false
+        "send_enabled": false,
+        "receive_enabled": false
       }
     },
     "upgrade": null,
