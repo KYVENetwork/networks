@@ -1,5 +1,5 @@
 {
-  "genesis_time": "0001-01-01T00:00:00Z",
+  "genesis_time": "2023-02-01T09:41:00Z",
   "chain_id": "europa-1",
   "initial_height": "1",
   "consensus_params": {
@@ -292,7 +292,7 @@
         "receive_enabled": false
       }
     },
-    "upgrade": null,
-    "vesting": null
+    "upgrade": {},
+    "vesting": {}
   }
 }
