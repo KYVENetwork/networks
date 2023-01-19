@@ -4,8 +4,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"os"
 	"time"
 
+	kyveApp "github.com/KYVENetwork/chain/app"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	"github.com/gogo/protobuf/jsonpb"
 	tmOs "github.com/tendermint/tendermint/libs/os"
 	tmTypes "github.com/tendermint/tendermint/types"
@@ -47,6 +51,8 @@ type AppState struct {
 }
 
 func main() {
+	InitSDKConfig("kyve")
+
 	chainID := flag.String("chain-id", "kyve-1", "")
 	denom := flag.String("denom", "ukyve", "")
 	startTime := flag.Int64("start-time", 1678786860, "")
@@ -66,7 +72,7 @@ func main() {
 		DistributionState: GenerateDistributionState(),
 		EvidenceState:     GenerateEvidenceState(),
 		FeeGrantState:     GenerateFeeGrantState(),
-		GenUtilState:      GenerateGenUtilState(),
+		GenUtilState:      GenerateGenUtilState(*chainID),
 		GovState:          GenerateGovState(*denom),
 		GroupState:        GenerateGroupState(),
 		MintState:         GenerateMintState(*denom),
@@ -109,4 +115,27 @@ func main() {
 	} else {
 		fmt.Println("✅ Completed genesis creation!")
 	}
+}
+
+func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, error) {
+	dir, dirErr := os.ReadDir(fmt.Sprintf("../%s/gentxs", chainID))
+	if dirErr != nil {
+		return nil, dirErr
+	}
+
+	txDecoder := kyveApp.MakeEncodingConfig().TxConfig.TxJSONDecoder()
+	txEncoder := kyveApp.MakeEncodingConfig().TxConfig.TxJSONEncoder()
+
+	var genTxs []sdk.Tx
+
+	for _, entry := range dir {
+		file, _ := os.ReadFile(fmt.Sprintf("../%s/gentxs/%s", chainID, entry.Name()))
+
+		tx, err := genUtilTypes.ValidateAndGetGenTx(file, txDecoder)
+		if err == nil {
+			genTxs = append(genTxs, tx)
+		}
+	}
+
+	return genUtilTypes.NewGenesisStateFromTx(txEncoder, genTxs), nil
 }

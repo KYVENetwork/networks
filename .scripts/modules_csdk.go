@@ -2,6 +2,9 @@ package main
 
 import (
 	"bytes"
+	"fmt"
+
+	tmOs "github.com/tendermint/tendermint/libs/os"
 
 	// Auth
 	authTypes "github.com/cosmos/cosmos-sdk/x/auth/types"
@@ -19,8 +22,6 @@ import (
 	evidenceTypes "github.com/cosmos/cosmos-sdk/x/evidence/types"
 	// FeeGrant
 	feeGrantTypes "github.com/cosmos/cosmos-sdk/x/feegrant"
-	// GenUtil
-	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	// Gov
 	govTypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	// Group
@@ -105,8 +106,12 @@ func GenerateFeeGrantState() []byte {
 	return rawFeeGrantState.Bytes()
 }
 
-func GenerateGenUtilState() []byte {
-	genUtilState := genUtilTypes.DefaultGenesisState()
+func GenerateGenUtilState(chainID string) []byte {
+	genUtilState, err := InjectGenesisTransactions(chainID)
+	if err != nil {
+		fmt.Println("❌ Failed to inject genesis transactions!")
+		tmOs.Exit(err.Error())
+	}
 
 	var rawGenUtilState bytes.Buffer
 	_ = marshaler.Marshal(&rawGenUtilState, genUtilState)
