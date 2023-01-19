@@ -1,18 +1,25 @@
 package main
 
 import (
+	"encoding/csv"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
 	"time"
 
+	"cosmossdk.io/math"
 	kyveApp "github.com/KYVENetwork/chain/app"
+	codecTypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	"github.com/gogo/protobuf/jsonpb"
 	tmOs "github.com/tendermint/tendermint/libs/os"
 	tmTypes "github.com/tendermint/tendermint/types"
+
+	// Bank
+	bankTypes "github.com/cosmos/cosmos-sdk/x/bank/types"
+	// GenUtil
+	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 )
 
 var marshaler = jsonpb.Marshaler{
@@ -64,9 +71,9 @@ func main() {
 	appState := AppState{
 		// NOTE: x/params is left as null intentionally.
 		// NOTE: x/upgrade & x/vesting have been assigned to {} per Tendermint standard.
-		AuthState:         GenerateAuthState(),
+		AuthState:         GenerateAuthState(*chainID),
 		AuthzState:        GenerateAuthzState(),
-		BankState:         GenerateBankState(),
+		BankState:         GenerateBankState(*chainID, *denom),
 		CapabilityState:   GenerateCapabilityState(),
 		CrisisState:       GenerateCrisisState(*denom),
 		DistributionState: GenerateDistributionState(),
@@ -115,6 +122,51 @@ func main() {
 	} else {
 		fmt.Println("✅ Completed genesis creation!")
 	}
+}
+
+func InjectGenesisAccounts(chainID string) ([]*codecTypes.Any, error) {
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/accounts.csv", chainID))
+	if openErr != nil {
+		return nil, openErr
+	}
+
+	file, readErr := csv.NewReader(rawFile).ReadAll()
+	if readErr != nil {
+		return nil, readErr
+	}
+
+	var accounts []*codecTypes.Any
+
+	for range file {
+		// [ADDRESS] [AMOUNT]
+	}
+
+	return accounts, nil
+}
+
+func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, error) {
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/accounts.csv", chainID))
+	if openErr != nil {
+		return nil, openErr
+	}
+
+	file, readErr := csv.NewReader(rawFile).ReadAll()
+	if readErr != nil {
+		return nil, readErr
+	}
+
+	var balances []bankTypes.Balance
+
+	for _, row := range file {
+		// [ADDRESS] [AMOUNT]
+		amount, _ := math.NewIntFromString(row[1])
+		coins := sdk.NewCoins(sdk.NewCoin(denom, amount))
+
+		balance := bankTypes.Balance{Address: row[0], Coins: coins}
+		balances = append(balances, balance)
+	}
+
+	return balances, nil
 }
 
 func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, error) {

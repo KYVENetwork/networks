@@ -34,8 +34,16 @@ import (
 	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
-func GenerateAuthState() []byte {
+func GenerateAuthState(chainID string) []byte {
 	authState := authTypes.DefaultGenesisState()
+
+	accounts, err := InjectGenesisAccounts(chainID)
+	if err != nil {
+		fmt.Println("❌ Failed to inject genesis accounts!")
+		tmOs.Exit(err.Error())
+	}
+
+	authState.Accounts = accounts
 
 	var rawAuthState bytes.Buffer
 	_ = marshaler.Marshal(&rawAuthState, authState)
@@ -52,8 +60,17 @@ func GenerateAuthzState() []byte {
 	return rawAuthzState.Bytes()
 }
 
-func GenerateBankState() []byte {
+func GenerateBankState(chainID string, denom string) []byte {
 	bankState := bankTypes.DefaultGenesisState()
+
+	balances, err := InjectGenesisBalances(chainID, denom)
+	if err != nil {
+		fmt.Println("❌ Failed to inject genesis balances!")
+		tmOs.Exit(err.Error())
+	}
+
+	bankState.Balances = balances
+	// TODO(@john): We can also set the total supply for validation.
 
 	var rawBankState bytes.Buffer
 	_ = marshaler.Marshal(&rawBankState, bankState)

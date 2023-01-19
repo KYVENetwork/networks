@@ -40,7 +40,17 @@
         "send_enabled": [],
         "default_send_enabled": true
       },
-      "balances": [],
+      "balances": [
+        {
+          "address": "kyve1blah",
+          "coins": [
+            {
+              "denom": "tkyve",
+              "amount": "1"
+            }
+          ]
+        }
+      ],
       "supply": [],
       "denom_metadata": []
     },
