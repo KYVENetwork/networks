@@ -16,6 +16,8 @@ import (
 	tmOs "github.com/tendermint/tendermint/libs/os"
 	tmTypes "github.com/tendermint/tendermint/types"
 
+	// Auth
+	authTypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	// Bank
 	bankTypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	// GenUtil
@@ -137,8 +139,19 @@ func InjectGenesisAccounts(chainID string) ([]*codecTypes.Any, error) {
 
 	var accounts []*codecTypes.Any
 
-	for range file {
+	for _, row := range file {
 		// [ADDRESS] [AMOUNT]
+		address, err := sdk.AccAddressFromBech32(row[0])
+		if err != nil {
+			return nil, err
+		}
+		account := authTypes.NewBaseAccountWithAddress(address)
+
+		rawAccount, err := codecTypes.NewAnyWithValue(account)
+		if err != nil {
+			return nil, err
+		}
+		accounts = append(accounts, rawAccount)
 	}
 
 	return accounts, nil
