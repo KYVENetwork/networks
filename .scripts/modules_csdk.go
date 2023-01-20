@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-
 	tmOs "github.com/tendermint/tendermint/libs/os"
 
 	// Auth
@@ -138,8 +137,10 @@ func GenerateGenUtilState(chainID string) []byte {
 	return rawGenUtilState.Bytes()
 }
 
-func GenerateGovState(_ string) []byte {
+func GenerateGovState(denom string) []byte {
 	govState := govTypes.DefaultGenesisState()
+
+	govState.DepositParams.MinDeposit[0].Denom = denom
 
 	var rawGovState bytes.Buffer
 	_ = marshaler.Marshal(&rawGovState, govState)
