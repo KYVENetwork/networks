@@ -87,8 +87,10 @@ func GenerateCapabilityState() []byte {
 	return rawCapabilityState.Bytes()
 }
 
-func GenerateCrisisState(_ string) []byte {
+func GenerateCrisisState(denom string) []byte {
 	crisisState := crisisTypes.DefaultGenesisState()
+
+	crisisState.ConstantFee.Denom = denom
 
 	var rawCrisisState bytes.Buffer
 	_ = marshaler.Marshal(&rawCrisisState, crisisState)
