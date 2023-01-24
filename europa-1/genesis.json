@@ -50,6 +50,15 @@
       },
       "balances": [
         {
+          "address": "kyve1e29j95xmsw3zmvtrk4st8e89z5n72v7nf70ma4",
+          "coins": [
+            {
+              "denom": "tkyve",
+              "amount": "165000000000000"
+            }
+          ]
+        },
+        {
           "address": "kyve1g2klgd9mz00q9dpgj73dkus8c9mypyfp8rutun",
           "coins": [
             {

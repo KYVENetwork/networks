@@ -152,9 +152,10 @@ func InjectGenesisAccounts(chainID string) ([]*codecTypes.Any, error) {
 
 	for _, row := range file {
 		// [ADDRESS] [AMOUNT]
+		// NOTE: All addresses that aren't parsable are skipped.
 		address, err := sdk.AccAddressFromBech32(row[0])
 		if err != nil {
-			return nil, err
+			continue
 		}
 		account := authTypes.NewBaseAccountWithAddress(address)
 
@@ -183,10 +184,16 @@ func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, e
 
 	for _, row := range file {
 		// [ADDRESS] [AMOUNT]
+		// NOTE: All addresses that aren't parsable are treated as module accounts.
+		address, err := sdk.AccAddressFromBech32(row[0])
+		if err != nil {
+			address = authTypes.NewModuleAddress(row[0])
+		}
+
 		amount, _ := math.NewIntFromString(row[1])
 		coins := sdk.NewCoins(sdk.NewCoin(denom, amount))
 
-		balance := bankTypes.Balance{Address: row[0], Coins: coins}
+		balance := bankTypes.Balance{Address: address.String(), Coins: coins}
 		balances = append(balances, balance)
 	}
 
