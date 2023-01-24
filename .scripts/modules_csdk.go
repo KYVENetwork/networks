@@ -3,6 +3,9 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"time"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	tmOs "github.com/tendermint/tendermint/libs/os"
 
 	// Auth
@@ -69,7 +72,9 @@ func GenerateBankState(chainID string, denom string) []byte {
 	}
 
 	bankState.Balances = balances
-	// TODO(@john): We can also set the total supply for validation.
+
+	bankState.Supply = GenerateBankSupply(denom)
+	bankState.DenomMetadata = GenerateBankMetadata(denom)
 
 	var rawBankState bytes.Buffer
 	_ = marshaler.Marshal(&rawBankState, bankState)
@@ -140,7 +145,16 @@ func GenerateGenUtilState(chainID string) []byte {
 func GenerateGovState(denom string) []byte {
 	govState := govTypes.DefaultGenesisState()
 
-	govState.DepositParams.MinDeposit[0].Denom = denom
+	// Set the minimum deposit to 25,000 $KYVE.
+	govState.DepositParams.MinDeposit = sdk.NewCoins(
+		sdk.NewCoin(denom, sdk.NewIntFromUint64(25_000*1_000_000)),
+	)
+	// Set the deposit period to 1 day.
+	oneDay := 24 * time.Hour
+	govState.DepositParams.MaxDepositPeriod = &oneDay
+	// Set the voting period to 7 days.
+	oneWeek := 7 * oneDay
+	govState.VotingParams.VotingPeriod = &oneWeek
 
 	var rawGovState bytes.Buffer
 	_ = marshaler.Marshal(&rawGovState, govState)
@@ -161,6 +175,9 @@ func GenerateMintState(denom string) []byte {
 	mintState := mintTypes.DefaultGenesisState()
 
 	mintState.Params.MintDenom = denom
+
+	// NOTE: This is assuming 6-second block times.
+	mintState.Params.BlocksPerYear = uint64(365.25 * 24 * 60 * 60 / 6)
 
 	var rawMintState bytes.Buffer
 	_ = marshaler.Marshal(&rawMintState, mintState)

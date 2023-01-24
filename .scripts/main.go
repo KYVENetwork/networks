@@ -14,6 +14,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/gogo/protobuf/jsonpb"
 	tmOs "github.com/tendermint/tendermint/libs/os"
+	tmProto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmTypes "github.com/tendermint/tendermint/types"
 
 	// Auth
@@ -64,7 +65,7 @@ func main() {
 
 	chainID := flag.String("chain-id", "kyve-1", "")
 	denom := flag.String("denom", "ukyve", "")
-	dateString := flag.String("start-time", "2023-03-10", "")
+	dateString := flag.String("start-time", "2023-03-14 09:41:00", "")
 	flag.Parse()
 
 	startTime, err := time.Parse("2006-01-02 15:04:05", *dateString)
@@ -111,9 +112,10 @@ func main() {
 	rawAppState, _ := json.Marshal(appState)
 
 	genesis := tmTypes.GenesisDoc{
-		GenesisTime: startTime,
-		ChainID:     *chainID,
-		AppState:    json.RawMessage(rawAppState),
+		GenesisTime:     startTime,
+		ChainID:         *chainID,
+		ConsensusParams: GenerateConsensusParams(),
+		AppState:        json.RawMessage(rawAppState),
 	}
 
 	validateErr := genesis.ValidateAndComplete()
@@ -129,6 +131,10 @@ func main() {
 	} else {
 		fmt.Println("✅ Completed genesis creation!")
 	}
+}
+
+func GenerateConsensusParams() *tmProto.ConsensusParams {
+	return tmTypes.DefaultConsensusParams()
 }
 
 func InjectGenesisAccounts(chainID string) ([]*codecTypes.Any, error) {

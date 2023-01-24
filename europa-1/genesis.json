@@ -59,8 +59,37 @@
           ]
         }
       ],
-      "supply": [],
-      "denom_metadata": []
+      "supply": [
+        {
+          "denom": "tkyve",
+          "amount": "1000000000"
+        }
+      ],
+      "denom_metadata": [
+        {
+          "description": "The native utility token of the KYVE network.",
+          "denom_units": [
+            {
+              "denom": "tkyve",
+              "exponent": 0,
+              "aliases": [
+                "microkyve"
+              ]
+            },
+            {
+              "denom": "kyve",
+              "exponent": 6,
+              "aliases": []
+            }
+          ],
+          "base": "tkyve",
+          "display": "kyve",
+          "name": "KYVE",
+          "symbol": "KYVE",
+          "uri": "",
+          "uri_hash": ""
+        }
+      ]
     },
     "bundles": {
       "params": {
@@ -78,7 +107,7 @@
     },
     "crisis": {
       "constant_fee": {
-        "denom": "stake",
+        "denom": "tkyve",
         "amount": "1000"
       }
     },
@@ -154,14 +183,14 @@
       "deposit_params": {
         "min_deposit": [
           {
-            "denom": "stake",
-            "amount": "10000000"
+            "denom": "tkyve",
+            "amount": "25000000000"
           }
         ],
-        "max_deposit_period": "172800s"
+        "max_deposit_period": "86400s"
       },
       "voting_params": {
-        "voting_period": "172800s"
+        "voting_period": "604800s"
       },
       "tally_params": {
         "quorum": "0.334000000000000000",
@@ -242,7 +271,7 @@
         "inflation_max": "0.200000000000000000",
         "inflation_min": "0.070000000000000000",
         "goal_bonded": "0.670000000000000000",
-        "blocks_per_year": "6311520"
+        "blocks_per_year": "5259600"
       }
     },
     "params": null,
