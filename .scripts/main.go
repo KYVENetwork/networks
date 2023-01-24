@@ -64,8 +64,13 @@ func main() {
 
 	chainID := flag.String("chain-id", "kyve-1", "")
 	denom := flag.String("denom", "ukyve", "")
-	startTime := flag.Int64("start-time", 1678786860, "")
+	dateString := flag.String("start-time", "2023-03-10", "")
 	flag.Parse()
+
+	startTime, err := time.Parse("2006-01-02 15:04:05", *dateString)
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println(fmt.Sprintf("🤖 Creating genesis for %s ...", *chainID))
 	fmt.Println(fmt.Sprintf("💰 Using %s as the global denom ...", *denom))
@@ -106,7 +111,7 @@ func main() {
 	rawAppState, _ := json.Marshal(appState)
 
 	genesis := tmTypes.GenesisDoc{
-		GenesisTime: time.Unix(*startTime, 0),
+		GenesisTime: startTime,
 		ChainID:     *chainID,
 		AppState:    json.RawMessage(rawAppState),
 	}
