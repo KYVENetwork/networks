@@ -1,6 +1,6 @@
 {
   "genesis_time": "2023-02-01T09:41:00Z",
-  "chain_id": "europa-1",
+  "chain_id": "kaon-1",
   "initial_height": "1",
   "consensus_params": {
     "block": {
