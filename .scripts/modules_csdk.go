@@ -36,10 +36,10 @@ import (
 	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
-func GenerateAuthState(chainID string) []byte {
+func GenerateAuthState(chainID string, denom string) []byte {
 	authState := authTypes.DefaultGenesisState()
 
-	accounts, err := InjectGenesisAccounts(chainID)
+	accounts, err := InjectGenesisAccounts(chainID, denom)
 	if err != nil {
 		fmt.Println("❌ Failed to inject genesis accounts!")
 		tmOs.Exit(err.Error())
@@ -131,7 +131,9 @@ func GenerateFeeGrantState() []byte {
 
 func GenerateGenUtilState(chainID string) []byte {
 	genUtilState, err := InjectGenesisTransactions(chainID)
-	if err != nil {
+	if err == nil {
+		fmt.Println(fmt.Sprintf("📝 Injected %d genesis transaction(s) ...", len(genUtilState.GenTxs)))
+	} else {
 		fmt.Println("❌ Failed to inject genesis transactions!")
 		tmOs.Exit(err.Error())
 	}

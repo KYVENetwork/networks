@@ -23,6 +23,10 @@ import (
 	bankTypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	// GenUtil
 	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
+	// Staking
+	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	// Vesting
+	vestingTypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 )
 
 var marshaler = jsonpb.Marshaler{
@@ -79,7 +83,7 @@ func main() {
 	appState := AppState{
 		// NOTE: x/params is left as null intentionally.
 		// NOTE: x/upgrade & x/vesting have been assigned to {} per Tendermint standard.
-		AuthState:         GenerateAuthState(*chainID),
+		AuthState:         GenerateAuthState(*chainID, *denom),
 		AuthzState:        GenerateAuthzState(),
 		BankState:         GenerateBankState(*chainID, *denom),
 		CapabilityState:   GenerateCapabilityState(),
@@ -137,7 +141,7 @@ func GenerateConsensusParams() *tmProto.ConsensusParams {
 	return tmTypes.DefaultConsensusParams()
 }
 
-func InjectGenesisAccounts(chainID string) ([]*codecTypes.Any, error) {
+func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, error) {
 	rawFile, openErr := os.Open(fmt.Sprintf("../%s/accounts.csv", chainID))
 	if openErr != nil {
 		return nil, openErr
@@ -157,7 +161,26 @@ func InjectGenesisAccounts(chainID string) ([]*codecTypes.Any, error) {
 		if err != nil {
 			continue
 		}
-		account := authTypes.NewBaseAccountWithAddress(address)
+		baseAccount := authTypes.NewBaseAccountWithAddress(address)
+
+		var account authTypes.AccountI = baseAccount
+		if row[3] != "" && row[4] != "" {
+			var vestingAmount math.Int
+			if row[2] == "" {
+				vestingAmount, _ = math.NewIntFromString(row[1])
+			} else {
+				vestingAmount, _ = math.NewIntFromString(row[2])
+			}
+
+			vestingCoins := sdk.NewCoins(sdk.NewCoin(denom, vestingAmount))
+
+			vestingStart, _ := time.Parse("2006-01-02", row[3])
+			vestingEnd, _ := time.Parse("2006-01-02", row[4])
+
+			account = vestingTypes.NewContinuousVestingAccount(
+				baseAccount, vestingCoins, vestingStart.Unix(), vestingEnd.Unix(),
+			)
+		}
 
 		rawAccount, err := codecTypes.NewAnyWithValue(account)
 		if err != nil {
@@ -214,11 +237,37 @@ func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, erro
 	for _, entry := range dir {
 		file, _ := os.ReadFile(fmt.Sprintf("../%s/gentxs/%s", chainID, entry.Name()))
 
-		tx, err := genUtilTypes.ValidateAndGetGenTx(file, txDecoder)
+		tx, err := ValidateAndGetGenTx(file, txDecoder)
 		if err == nil {
 			genTxs = append(genTxs, tx)
 		}
 	}
 
 	return genUtilTypes.NewGenesisStateFromTx(txEncoder, genTxs), nil
+}
+
+// ValidateAndGetGenTx is inspired by:
+// https://github.com/cosmos/cosmos-sdk/blob/release/v0.46.x/x/genutil/types/genesis_state.go#L108
+func ValidateAndGetGenTx(genTx json.RawMessage, txJSONDecoder sdk.TxDecoder) (sdk.Tx, error) {
+	tx, err := txJSONDecoder(genTx)
+	if err != nil {
+		return tx, fmt.Errorf("failed to decode gentx: %s, error: %s", genTx, err)
+	}
+
+	msgs := tx.GetMsgs()
+	if len(msgs) != 1 {
+		return tx, fmt.Errorf("unexpected number of GenTx messages; got: %d, expected: 1", len(msgs))
+	}
+
+	if sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&bankTypes.MsgSend{}) &&
+		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
+		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
+		return tx, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msgs[0])
+	}
+
+	if err := msgs[0].ValidateBasic(); err != nil {
+		return tx, fmt.Errorf("invalid GenTx '%s': %s", msgs[0], err)
+	}
+
+	return tx, nil
 }
