@@ -4,15 +4,13 @@
 
 ### Step 1 — Install `kyved`.
 
-As of now we only provide a pre-compiled binary. For genesis-transactions a
-default chain binary based on cosmos v0.46.x should be sufficient.
+For now, we are only providing pre-compiled `kyved` binaries. Note that we
+might ship a new version of the binary before the network launch.
 
-**Warning: For the launch of the regenesis we might ship a newer version**
-
-linux/amd64: [https://files.kyve.network/chain/v0.8.0/kyved_linux_amd64.tar.gz](
+`linux/amd64`: [https://files.kyve.network/chain/v0.8.0/kyved_linux_amd64.tar.gz](
 https://files.kyve.network/chain/v0.8.0/kyved_linux_amd64.tar.gz)
 
-linux/arm64: [https://files.kyve.network/chain/v0.8.0/kyved_linux_arm64.tar.gz](
+`linux/arm64`: [https://files.kyve.network/chain/v0.8.0/kyved_linux_arm64.tar.gz](
 https://files.kyve.network/chain/v0.8.0/kyved_linux_arm64.tar.gz)
 
 ### Step 2 — Initialise `kyved` for Kaon.
