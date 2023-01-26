@@ -555,6 +555,10 @@
     },
     "team": {
       "params": {},
+      "authority": {
+        "total_rewards": "0",
+        "rewards_claimed": "0"
+      },
       "account_list": [],
       "account_count": "0"
     },
