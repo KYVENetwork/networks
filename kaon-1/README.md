@@ -7,6 +7,12 @@
 For now, we are only providing pre-compiled `kyved` binaries. Note that we
 might ship a new version of the binary before the network launch.
 
+`darwin/amd64`: [https://files.kyve.network/chain/v0.8.0/kyved_darwin_amd64.tar.gz](
+https://files.kyve.network/chain/v0.8.0/kyved_darwin_amd64.tar.gz)
+
+`darwin/arm64`: [https://files.kyve.network/chain/v0.8.0/kyved_darwin_arm64.tar.gz](
+https://files.kyve.network/chain/v0.8.0/kyved_darwin_arm64.tar.gz)
+
 `linux/amd64`: [https://files.kyve.network/chain/v0.8.0/kyved_linux_amd64.tar.gz](
 https://files.kyve.network/chain/v0.8.0/kyved_linux_amd64.tar.gz)
 
