@@ -50,6 +50,6 @@ func GenerateBankMetadata(denom string) []bankTypes.Metadata {
 
 func GenerateBankSupply(denom string) sdk.Coins {
 	return sdk.NewCoins(
-		sdk.NewCoin(denom, sdk.NewIntFromUint64(1_000_000_000)),
+		sdk.NewCoin(denom, sdk.NewIntFromUint64(1_000_000_000_000_000)),
 	)
 }

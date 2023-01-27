@@ -289,7 +289,7 @@
       "supply": [
         {
           "denom": "tkyve",
-          "amount": "1000000000"
+          "amount": "1000000000000000"
         }
       ],
       "denom_metadata": [
