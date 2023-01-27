@@ -154,7 +154,7 @@ func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, err
 
 	var accounts []*codecTypes.Any
 
-	for _, row := range file {
+	for _, row := range file[1:] {
 		// [ADDRESS] [AMOUNT]
 		// NOTE: All addresses that aren't parsable are skipped.
 		address, err := sdk.AccAddressFromBech32(row[0])
@@ -205,7 +205,7 @@ func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, e
 
 	var balances []bankTypes.Balance
 
-	for _, row := range file {
+	for _, row := range file[1:] {
 		// [ADDRESS] [AMOUNT]
 		// NOTE: All addresses that aren't parsable are treated as module accounts.
 		address, err := sdk.AccAddressFromBech32(row[0])
