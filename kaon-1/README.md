@@ -52,7 +52,7 @@ Please note that you can find the address above using the following command:
 kyved keys show <name> --address --home ~/.kaon-1
 ```
 
-### Step 4 — Generate a genesis transaction.
+### Step 5 — Generate a genesis transaction.
 
 The following command will create and sign a genesis transaction, successfully
 creating your validator on network launch. Again, please note that as your
@@ -68,7 +68,7 @@ kyved gentx <name> 1000000tkyve \
   --details "My validator description."
 ```
 
-### Step 5 — Submit your genesis transaction.
+### Step 6 — Submit your genesis transaction.
 
 You will want to create a fork of this repository
 ([`KYVENetwork/networks`](https://github.com/KYVENetwork/networks/fork)) to
