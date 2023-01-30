@@ -18,6 +18,7 @@ import (
 	tmTypes "github.com/tendermint/tendermint/types"
 
 	// Auth
+	authSigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	authTypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	// Bank
 	bankTypes "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -238,7 +239,11 @@ func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, erro
 		file, _ := os.ReadFile(fmt.Sprintf("../%s/gentxs/%s", chainID, entry.Name()))
 
 		tx, err := ValidateAndGetGenTx(file, txDecoder)
-		if err == nil {
+		if err != nil {
+			continue
+		}
+
+		if VerifySignature(chainID, tx) {
 			genTxs = append(genTxs, tx)
 		}
 	}
@@ -248,26 +253,58 @@ func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, erro
 
 // ValidateAndGetGenTx is inspired by:
 // https://github.com/cosmos/cosmos-sdk/blob/release/v0.46.x/x/genutil/types/genesis_state.go#L108
-func ValidateAndGetGenTx(genTx json.RawMessage, txJSONDecoder sdk.TxDecoder) (sdk.Tx, error) {
-	tx, err := txJSONDecoder(genTx)
+func ValidateAndGetGenTx(genTx json.RawMessage, txJSONDecoder sdk.TxDecoder) (authSigning.SigVerifiableTx, error) {
+	rawTx, err := txJSONDecoder(genTx)
 	if err != nil {
-		return tx, fmt.Errorf("failed to decode gentx: %s, error: %s", genTx, err)
+		return nil, fmt.Errorf("failed to decode gentx: %s, error: %s", genTx, err)
+	}
+
+	tx, ok := rawTx.(authSigning.SigVerifiableTx)
+	if !ok {
+		return nil, fmt.Errorf("invalid GenTx")
 	}
 
 	msgs := tx.GetMsgs()
 	if len(msgs) != 1 {
-		return tx, fmt.Errorf("unexpected number of GenTx messages; got: %d, expected: 1", len(msgs))
+		return nil, fmt.Errorf("unexpected number of GenTx messages; got: %d, expected: 1", len(msgs))
 	}
 
 	if sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&bankTypes.MsgSend{}) &&
 		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
 		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
-		return tx, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msgs[0])
+		return nil, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msgs[0])
 	}
 
 	if err := msgs[0].ValidateBasic(); err != nil {
-		return tx, fmt.Errorf("invalid GenTx '%s': %s", msgs[0], err)
+		return nil, fmt.Errorf("invalid GenTx '%s': %s", msgs[0], err)
 	}
 
 	return tx, nil
+}
+
+// VerifySignature is inspired by:
+// https://github.com/cosmos/cosmos-sdk/blob/release/v0.46.x/x/auth/signing/verify.go#L14
+func VerifySignature(chainID string, tx authSigning.SigVerifiableTx) bool {
+	signatures, err := tx.GetSignaturesV2()
+	if err != nil || len(signatures) != 1 {
+		return false
+	}
+
+	pubKey := signatures[0].PubKey
+	signerData := authSigning.SignerData{
+		Address:       pubKey.Address().String(),
+		ChainID:       chainID,
+		AccountNumber: 0,
+		Sequence:      0,
+		PubKey:        pubKey,
+	}
+
+	err = authSigning.VerifySignature(
+		pubKey, signerData, signatures[0].Data, kyveApp.MakeEncodingConfig().TxConfig.SignModeHandler(), tx,
+	)
+	if err != nil {
+		return false
+	}
+
+	return true
 }
