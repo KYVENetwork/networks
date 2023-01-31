@@ -200,6 +200,7 @@ func GenerateStakingState(denom string) []byte {
 	stakingState := stakingTypes.DefaultGenesisState()
 
 	stakingState.Params.BondDenom = denom
+	stakingState.Params.MinCommissionRate = sdk.MustNewDecFromStr("0.05")
 
 	var rawStakingState bytes.Buffer
 	_ = marshaler.Marshal(&rawStakingState, stakingState)
