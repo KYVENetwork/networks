@@ -269,7 +269,7 @@ func ValidateAndGetGenTx(genTx json.RawMessage, txJSONDecoder sdk.TxDecoder) (au
 		return nil, fmt.Errorf("unexpected number of GenTx messages; got: %d, expected: 1", len(msgs))
 	}
 
-	if sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&bankTypes.MsgSend{}) &&
+	if sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&bankTypes.MsgMultiSend{}) &&
 		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
 		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
 		return nil, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msgs[0])
