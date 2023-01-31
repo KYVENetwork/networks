@@ -265,18 +265,16 @@ func ValidateAndGetGenTx(genTx json.RawMessage, txJSONDecoder sdk.TxDecoder) (au
 	}
 
 	msgs := tx.GetMsgs()
-	if len(msgs) != 1 {
-		return nil, fmt.Errorf("unexpected number of GenTx messages; got: %d, expected: 1", len(msgs))
-	}
+	for _, msg := range msgs {
+		if sdk.MsgTypeURL(msg) != sdk.MsgTypeURL(&bankTypes.MsgMultiSend{}) &&
+			sdk.MsgTypeURL(msg) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
+			sdk.MsgTypeURL(msg) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
+			return nil, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msg)
+		}
 
-	if sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&bankTypes.MsgMultiSend{}) &&
-		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
-		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
-		return nil, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msgs[0])
-	}
-
-	if err := msgs[0].ValidateBasic(); err != nil {
-		return nil, fmt.Errorf("invalid GenTx '%s': %s", msgs[0], err)
+		if err := msg.ValidateBasic(); err != nil {
+			return nil, fmt.Errorf("invalid GenTx '%s': %s", msg, err)
+		}
 	}
 
 	return tx, nil
