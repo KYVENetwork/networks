@@ -71,6 +71,7 @@ func main() {
 	chainID := flag.String("chain-id", "kyve-1", "")
 	denom := flag.String("denom", "ukyve", "")
 	dateString := flag.String("start-time", "2023-03-14 09:41:00", "")
+	unsafe := flag.Bool("unsafe", false, "")
 	flag.Parse()
 
 	startTime, err := time.Parse("2006-01-02 15:04:05", *dateString)
@@ -92,7 +93,7 @@ func main() {
 		DistributionState: GenerateDistributionState(),
 		EvidenceState:     GenerateEvidenceState(),
 		FeeGrantState:     GenerateFeeGrantState(),
-		GenUtilState:      GenerateGenUtilState(*chainID),
+		GenUtilState:      GenerateGenUtilState(*chainID, *unsafe),
 		GovState:          GenerateGovState(*denom),
 		GroupState:        GenerateGroupState(),
 		MintState:         GenerateMintState(*denom),
@@ -224,7 +225,7 @@ func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, e
 	return balances, nil
 }
 
-func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, error) {
+func InjectGenesisTransactions(chainID string, unsafe bool) (*genUtilTypes.GenesisState, error) {
 	dir, dirErr := os.ReadDir(fmt.Sprintf("../%s/gentxs", chainID))
 	if dirErr != nil {
 		return nil, dirErr
@@ -240,10 +241,14 @@ func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, erro
 
 		tx, err := ValidateAndGetGenTx(file, txDecoder)
 		if err != nil {
+			if unsafe {
+				fmt.Println(err)
+			}
+
 			continue
 		}
 
-		if VerifySignature(chainID, tx) {
+		if unsafe || VerifySignature(chainID, tx) {
 			genTxs = append(genTxs, tx)
 		}
 	}

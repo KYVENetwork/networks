@@ -129,8 +129,8 @@ func GenerateFeeGrantState() []byte {
 	return rawFeeGrantState.Bytes()
 }
 
-func GenerateGenUtilState(chainID string) []byte {
-	genUtilState, err := InjectGenesisTransactions(chainID)
+func GenerateGenUtilState(chainID string, unsafe bool) []byte {
+	genUtilState, err := InjectGenesisTransactions(chainID, unsafe)
 	if err == nil {
 		fmt.Println(fmt.Sprintf("📝 Injected %d genesis transaction(s) ...", len(genUtilState.GenTxs)))
 	} else {
