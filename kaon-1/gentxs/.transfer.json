@@ -9,7 +9,7 @@
             "coins": [
               {
                 "denom": "tkyve",
-                "amount": "250008000000"
+                "amount": "250009000000"
               }
             ]
           }
@@ -80,6 +80,15 @@
           },
           {
             "address": "kyve1myu8q0kdjm2hu2u5yhpna5uznm8xuqxmg9y9r6",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1c8jjsnzshhc4tu4mu2nu2lkjj9kdeyfj2czk5f",
             "coins": [
               {
                 "denom": "tkyve",
