@@ -67,25 +67,11 @@
           "start_time": "1678752000"
         },
         {
-          "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
-          "base_vesting_account": {
-            "base_account": {
-              "address": "kyve1n5uh26y25xhmf7y79qdvymjrerwkqn4www72p6",
-              "pub_key": null,
-              "account_number": "0",
-              "sequence": "0"
-            },
-            "original_vesting": [
-              {
-                "denom": "tkyve",
-                "amount": "18334000000000"
-              }
-            ],
-            "delegated_free": [],
-            "delegated_vesting": [],
-            "end_time": "1710374400"
-          },
-          "start_time": "1681430400"
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "kyve1n5uh26y25xhmf7y79qdvymjrerwkqn4www72p6",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
@@ -123,67 +109,25 @@
           "sequence": "0"
         },
         {
-          "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
-          "base_vesting_account": {
-            "base_account": {
-              "address": "kyve1t4sw6g0akq7snjjqqqmmzpvyk2z4qx6u6xgglg",
-              "pub_key": null,
-              "account_number": "0",
-              "sequence": "0"
-            },
-            "original_vesting": [
-              {
-                "denom": "tkyve",
-                "amount": "100000000000000"
-              }
-            ],
-            "delegated_free": [],
-            "delegated_vesting": [],
-            "end_time": "1804982400"
-          },
-          "start_time": "1710374400"
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "kyve1t4sw6g0akq7snjjqqqmmzpvyk2z4qx6u6xgglg",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
         },
         {
-          "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
-          "base_vesting_account": {
-            "base_account": {
-              "address": "kyve14ue4zyzq6r8re0fur5snzum8gprau5heqlmdwl",
-              "pub_key": null,
-              "account_number": "0",
-              "sequence": "0"
-            },
-            "original_vesting": [
-              {
-                "denom": "tkyve",
-                "amount": "115000000000000"
-              }
-            ],
-            "delegated_free": [],
-            "delegated_vesting": [],
-            "end_time": "1757808000"
-          },
-          "start_time": "1694649600"
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "kyve14ue4zyzq6r8re0fur5snzum8gprau5heqlmdwl",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
         },
         {
-          "@type": "/cosmos.vesting.v1beta1.ContinuousVestingAccount",
-          "base_vesting_account": {
-            "base_account": {
-              "address": "kyve13s3ncz6m6x8qvscprfh38ll6sc6y6etlx93lzw",
-              "pub_key": null,
-              "account_number": "0",
-              "sequence": "0"
-            },
-            "original_vesting": [
-              {
-                "denom": "tkyve",
-                "amount": "100000000000000"
-              }
-            ],
-            "delegated_free": [],
-            "delegated_vesting": [],
-            "end_time": "1773446400"
-          },
-          "start_time": "1710374400"
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "kyve13s3ncz6m6x8qvscprfh38ll6sc6y6etlx93lzw",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
         }
       ]
     },
