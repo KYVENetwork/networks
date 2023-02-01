@@ -1,0 +1,84 @@
+{
+  "body": {
+    "messages": [
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1x5wgh6vwye60wv3dtshs9dmqggwfx2ldk7p0ff",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "6000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1fcmc0eg98f26xfzx2lyzcmlhu4l79ajv7squv9",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "3000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1gvn65ers5h8znn03pdfmynya3u3znyr6xrtpvj",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "2250000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1kh4jhy975luq2v65rtythmd44y70vwx0820k6j",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "6000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1xxn7c2faru5axux8skkvzwget6r6xdy3772s75",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "6000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1ud9en02zs6j0a99l7l5elv083y9uacngu8y6ps",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "1500000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1myu8q0kdjm2hu2u5yhpna5uznm8xuqxm64y9dc",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "1500000000000"
+        }
+      }
+    ],
+    "memo": "",
+    "timeout_height": "0",
+    "extension_options": [],
+    "non_critical_extension_options": []
+  },
+  "auth_info": {
+    "signer_infos": [],
+    "fee": {
+      "amount": [],
+      "gas_limit": "200000",
+      "payer": "",
+      "granter": ""
+    },
+    "tip": null
+  },
+  "signatures": []
+}

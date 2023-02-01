@@ -71,6 +71,7 @@ func main() {
 	chainID := flag.String("chain-id", "kyve-1", "")
 	denom := flag.String("denom", "ukyve", "")
 	dateString := flag.String("start-time", "2023-03-14 09:41:00", "")
+	unsafe := flag.Bool("unsafe", false, "")
 	flag.Parse()
 
 	startTime, err := time.Parse("2006-01-02 15:04:05", *dateString)
@@ -92,7 +93,7 @@ func main() {
 		DistributionState: GenerateDistributionState(),
 		EvidenceState:     GenerateEvidenceState(),
 		FeeGrantState:     GenerateFeeGrantState(),
-		GenUtilState:      GenerateGenUtilState(*chainID),
+		GenUtilState:      GenerateGenUtilState(*chainID, *unsafe),
 		GovState:          GenerateGovState(*denom),
 		GroupState:        GenerateGroupState(),
 		MintState:         GenerateMintState(*denom),
@@ -224,7 +225,7 @@ func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, e
 	return balances, nil
 }
 
-func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, error) {
+func InjectGenesisTransactions(chainID string, unsafe bool) (*genUtilTypes.GenesisState, error) {
 	dir, dirErr := os.ReadDir(fmt.Sprintf("../%s/gentxs", chainID))
 	if dirErr != nil {
 		return nil, dirErr
@@ -240,10 +241,14 @@ func InjectGenesisTransactions(chainID string) (*genUtilTypes.GenesisState, erro
 
 		tx, err := ValidateAndGetGenTx(file, txDecoder)
 		if err != nil {
+			if unsafe {
+				fmt.Println(err)
+			}
+
 			continue
 		}
 
-		if VerifySignature(chainID, tx) {
+		if unsafe || VerifySignature(chainID, tx) {
 			genTxs = append(genTxs, tx)
 		}
 	}
@@ -265,18 +270,16 @@ func ValidateAndGetGenTx(genTx json.RawMessage, txJSONDecoder sdk.TxDecoder) (au
 	}
 
 	msgs := tx.GetMsgs()
-	if len(msgs) != 1 {
-		return nil, fmt.Errorf("unexpected number of GenTx messages; got: %d, expected: 1", len(msgs))
-	}
+	for _, msg := range msgs {
+		if sdk.MsgTypeURL(msg) != sdk.MsgTypeURL(&bankTypes.MsgMultiSend{}) &&
+			sdk.MsgTypeURL(msg) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
+			sdk.MsgTypeURL(msg) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
+			return nil, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msg)
+		}
 
-	if sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&bankTypes.MsgSend{}) &&
-		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}) &&
-		sdk.MsgTypeURL(msgs[0]) != sdk.MsgTypeURL(&stakingTypes.MsgDelegate{}) {
-		return nil, fmt.Errorf("unexpected GenTx message type; expected: MsgSend, MsgCreateValidator, or MsgDelegate, got: %T", msgs[0])
-	}
-
-	if err := msgs[0].ValidateBasic(); err != nil {
-		return nil, fmt.Errorf("invalid GenTx '%s': %s", msgs[0], err)
+		if err := msg.ValidateBasic(); err != nil {
+			return nil, fmt.Errorf("invalid GenTx '%s': %s", msg, err)
+		}
 	}
 
 	return tx, nil

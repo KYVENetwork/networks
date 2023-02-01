@@ -1,0 +1,118 @@
+{
+  "body": {
+    "messages": [
+      {
+        "@type": "/cosmos.bank.v1beta1.MsgMultiSend",
+        "inputs": [
+          {
+            "address": "kyve1z67jal9d9unjvmzsadps9jytzt9kx2m2vgc3wm",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "250008000000"
+              }
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "address": "kyve1qfnu3k5vwgfyzsaqe0w4ssqp99delgtg2qz0jc",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "250000000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1x5wgh6vwye60wv3dtshs9dmqggwfx2ldywp08t",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1fcmc0eg98f26xfzx2lyzcmlhu4l79ajvvqquz8",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1gvn65ers5h8znn03pdfmynya3u3znyr65ntpzs",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1kh4jhy975luq2v65rtythmd44y70vwx0460k5s",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1xxn7c2faru5axux8skkvzwget6r6xdy3vw2ssk",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1ud9en02zs6j0a99l7l5elv083y9uacngwhy60j",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1myu8q0kdjm2hu2u5yhpna5uznm8xuqxmg9y9r6",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve1n38xc4rgkg3gusf0k4kpktlure498ynr276alc",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "memo": "",
+    "timeout_height": "0",
+    "extension_options": [],
+    "non_critical_extension_options": []
+  },
+  "auth_info": {
+    "signer_infos": [],
+    "fee": {
+      "amount": [],
+      "gas_limit": "200000",
+      "payer": "",
+      "granter": ""
+    },
+    "tip": null
+  },
+  "signatures": []
+}

@@ -129,8 +129,8 @@ func GenerateFeeGrantState() []byte {
 	return rawFeeGrantState.Bytes()
 }
 
-func GenerateGenUtilState(chainID string) []byte {
-	genUtilState, err := InjectGenesisTransactions(chainID)
+func GenerateGenUtilState(chainID string, unsafe bool) []byte {
+	genUtilState, err := InjectGenesisTransactions(chainID, unsafe)
 	if err == nil {
 		fmt.Println(fmt.Sprintf("📝 Injected %d genesis transaction(s) ...", len(genUtilState.GenTxs)))
 	} else {
@@ -200,6 +200,7 @@ func GenerateStakingState(denom string) []byte {
 	stakingState := stakingTypes.DefaultGenesisState()
 
 	stakingState.Params.BondDenom = denom
+	stakingState.Params.MinCommissionRate = sdk.MustNewDecFromStr("0.05")
 
 	var rawStakingState bytes.Buffer
 	_ = marshaler.Marshal(&rawStakingState, stakingState)
