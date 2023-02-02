@@ -1,5 +1,9 @@
 # Kaon Testnet <sup>v1</sup>
 
+> Genesis validator submissions were closed on Feb 3rd, 2023.
+
+<!--
+
 ## Becoming a Genesis Validator
 
 ### Step 1 — Install `kyved`.
@@ -86,3 +90,5 @@ can obtain your validator address with the following command (it will be in the
 ```shell
 kyved debug addr <address>
 ```
+
+-->
