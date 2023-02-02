@@ -61,6 +61,15 @@
             ]
           },
           {
+            "address": "kyve1xkngxsk8cghytch6m7qje5fejpku0g65u3yjn3",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
             "address": "kyve1kh4jhy975luq2v65rtythmd44y70vwx0460k5s",
             "coins": [
               {
