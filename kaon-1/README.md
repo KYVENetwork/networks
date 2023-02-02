@@ -2,6 +2,72 @@
 
 > Genesis validator submissions were closed on Feb 3rd, 2023.
 
+## Running a Validator
+
+> IMPORTANT: This guide assumes you've already configured your validator
+> instance when submitting a genesis transaction. A complete guide is coming
+> later, post network launch.
+
+### Step 1 — Upgrade `kyved`.
+
+To correctly run your validator, ensure you're running the latest release of
+the `kyved` binary. Note that you used an outdated binary to submit your
+genesis transactions.
+
+`darwin/amd64`: [https://files.kyve.network/chain/v1.0.0-rc0/kyved_darwin_amd64.tar.gz](
+https://files.kyve.network/chain/v1.0.0-rc0/kyved_darwin_amd64.tar.gz)
+
+`darwin/arm64`: [https://files.kyve.network/chain/v1.0.0-rc0/kyved_darwin_arm64.tar.gz](
+https://files.kyve.network/chain/v1.0.0-rc0/kyved_darwin_arm64.tar.gz)
+
+`linux/amd64`: [https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_amd64.tar.gz](
+https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_amd64.tar.gz)
+
+`linux/arm64`: [https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_arm64.tar.gz](
+https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_arm64.tar.gz)
+
+### Step 2 — Install `cosmovisor`.
+
+**NOTE** — This assumes you have [Go](https://go.dev/) on your instance.
+
+```shell
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+```
+
+### Step 3 — Initialise `cosmovisor` for Kaon.
+
+Before initialising, we first need to export some required environment variables:
+
+```shell
+export DAEMON_NAME=kyved
+export DAEMON_HOME=~/.kaon-1
+```
+
+Now, we can initialise `cosmovisor` using the following command:
+
+```shell
+cosmovisor init <path to kyved>
+```
+
+### Step 4 — Download & verify the Kaon genesis file.
+
+```shell
+curl https://raw.githubusercontent.com/KYVENetwork/networks/main/kaon-1/genesis.json > ~/.kaon-1/config/genesis.json
+```
+
+**NOTE** — This assumes you have [`sha256sum`](https://linux.die.net/man/1/sha256sum/) on your instance.
+
+```shell
+cd ~/.kaon-1/config
+echo "<hash>  genesis.json" | sha256sum -c
+```
+
+### Step 5 — Start `cosmovisor`.
+
+```shell
+cosmovisor start
+```
+
 <!--
 
 ## Becoming a Genesis Validator
