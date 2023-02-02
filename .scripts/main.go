@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	teamTypes "github.com/KYVENetwork/chain/x/team/types"
 	"os"
+	"strconv"
 	"time"
 
 	"cosmossdk.io/math"
@@ -113,7 +115,7 @@ func main() {
 		GlobalState:     GenerateGlobalState(),
 		PoolState:       GeneratePoolState(),
 		StakersState:    GenerateStakersState(),
-		TeamState:       GenerateTeamState(),
+		TeamState:       GenerateTeamState(*chainID),
 	}
 	rawAppState, _ := json.Marshal(appState)
 
@@ -254,6 +256,66 @@ func InjectGenesisTransactions(chainID string, unsafe bool) (*genUtilTypes.Genes
 	}
 
 	return genUtilTypes.NewGenesisStateFromTx(txEncoder, genTxs), nil
+}
+
+func InjectTeamAccounts(chainID string) ([]teamTypes.TeamVestingAccount, error) {
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/team.csv", chainID))
+	if openErr != nil {
+		return nil, openErr
+	}
+
+	file, readErr := csv.NewReader(rawFile).ReadAll()
+	if readErr != nil {
+		return nil, readErr
+	}
+
+	var teamAccounts []teamTypes.TeamVestingAccount
+
+	for index, row := range file[1:] {
+		// [ADDRESS] [AMOUNT]
+		// NOTE: All addresses that aren't parsable are treated as module accounts.
+
+		accountId, err := strconv.Atoi(row[0])
+		if err != nil {
+			return nil, err
+		}
+		if accountId != index {
+			return nil, fmt.Errorf("account id sequence mismatch: %s", row)
+		}
+
+		amount, err := strconv.ParseUint(row[1], 10, 64)
+		if err != nil {
+			return nil, err
+		}
+
+		commencement, err := time.Parse("2006-01-02", row[2])
+		if err != nil {
+			return nil, err
+		}
+
+		clawbackUnix := int64(0)
+		if len(row[3]) > 0 {
+			clawback, err := time.Parse("2006-01-02", row[3])
+			if err != nil {
+				return nil, err
+			}
+
+			if clawback.Unix() < commencement.Unix() {
+				return nil, fmt.Errorf("clawback can not be before commencment: %s", row)
+			}
+
+			clawbackUnix = clawback.Unix()
+		}
+
+		teamAccounts = append(teamAccounts, teamTypes.TeamVestingAccount{
+			Id:              uint64(accountId),
+			TotalAllocation: amount,
+			Commencement:    uint64(commencement.Unix()),
+			Clawback:        uint64(clawbackUnix),
+		})
+	}
+
+	return teamAccounts, nil
 }
 
 // ValidateAndGetGenTx is inspired by:
