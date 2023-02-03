@@ -26,6 +26,15 @@ https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_amd64.tar.gz)
 `linux/arm64`: [https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_arm64.tar.gz](
 https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_arm64.tar.gz)
 
+After downloading verify the check if the sha256 hash matches.
+
+`kyved_darwin_amd64.tar.gz` : `adca1016babd27c5f23ad40caf379d884556ea647c0d54fa01918c17b26803fb`\
+`kyved_darwin_arm64.tar.gz` : `4c3c297ed6cc924fdc37f3a409f85837c71443ba12f6ff33163d123279fa2f36`\
+`kyved_linux_amd64.tar.gz` : `15aa68a33a3427c8769613e6e433a4cf1d84308e0417a607fe59d10a830587af`\
+`kyved_linux_arm64.tar.gz` : `6c92a5de44be1b450e82f049e034bfe0676f1c707cede0395844ad0183890a4d`
+
+If not done yet, initialise the chain directory (`./kyved init <moniker> --home ~/.kaon-1`).
+
 ### Step 2 — Install `cosmovisor`.
 
 **NOTE** — This assumes you have [Go](https://go.dev/) on your instance.
