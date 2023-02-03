@@ -144,7 +144,7 @@ require (
 
 replace (
 	// use internal codebase for chain
-	github.com/KYVENetwork/chain => github.com/KYVENetwork/chain-beta v0.8.1-0.20230202144806-5904970942ed
+	github.com/KYVENetwork/chain => github.com/KYVENetwork/chain-beta v1.0.0-rc0
 
 	// use kyve flavored cosmos/cosmos-sdk
 	github.com/cosmos/cosmos-sdk => github.com/KYVENetwork/cosmos-sdk v0.46.8-kyve-rc0

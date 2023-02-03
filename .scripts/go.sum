@@ -78,8 +78,8 @@ github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym
 github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d h1:nalkkPQcITbvhmL4+C4cKA87NW0tfm3Kl9VXRoPywFg=
 github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d/go.mod h1:URdX5+vg25ts3aCh8H5IFZybJYKWhJHYMTnf+ULtoC4=
 github.com/DataDog/datadog-go v3.2.0+incompatible/go.mod h1:LButxg5PwREeZtORoXG3tL4fMGNddJ+vMq1mwgfaqoQ=
-github.com/KYVENetwork/chain-beta v0.8.1-0.20230202144806-5904970942ed h1:NZ4JgqMdK2B9IPtGch1FuIjtIPGQ3DVYqezvvmMrp5Q=
-github.com/KYVENetwork/chain-beta v0.8.1-0.20230202144806-5904970942ed/go.mod h1:Yk4+0BZaU6JyrMFNhzIZ1yno8Va4eGmkrBaUE1ZjISU=
+github.com/KYVENetwork/chain-beta v1.0.0-rc0 h1:6bHZQ6ZBSZdezE+DKRNMoqNoCoVIW7dgWtH6maVk4wE=
+github.com/KYVENetwork/chain-beta v1.0.0-rc0/go.mod h1:Yk4+0BZaU6JyrMFNhzIZ1yno8Va4eGmkrBaUE1ZjISU=
 github.com/KYVENetwork/cosmos-sdk v0.46.8-kyve-rc0 h1:CbqKfDADxi0fYJ3kV/aIrYlpV+h96VJnW90uSsbtydQ=
 github.com/KYVENetwork/cosmos-sdk v0.46.8-kyve-rc0/go.mod h1:lg+FqwndbbCYQk1YTUWRDpOsNbQG0nINQqxY7ZnsAP8=
 github.com/OneOfOne/xxhash v1.2.2 h1:KMrpdQIwFcEqXDklaen+P1axHaj9BSKzvpUUfnHldSE=
