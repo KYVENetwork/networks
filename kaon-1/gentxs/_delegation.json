@@ -58,6 +58,15 @@
       {
         "@type": "/cosmos.staking.v1beta1.MsgDelegate",
         "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper174duylaarqtmku5y689upqjuzzkz8dw90wqsmc",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "3000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
         "validator_address": "kyvevaloper1xxn7c2faru5axux8skkvzwget6r6xdy3772s75",
         "amount": {
           "denom": "tkyve",
