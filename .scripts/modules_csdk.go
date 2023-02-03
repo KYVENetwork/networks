@@ -94,7 +94,8 @@ func GenerateCapabilityState() []byte {
 func GenerateCrisisState(denom string) []byte {
 	crisisState := crisisTypes.DefaultGenesisState()
 
-	crisisState.ConstantFee.Denom = denom
+	// Set the crisis fee to 10,000 $KYVE.
+	crisisState.ConstantFee = sdk.NewCoin(denom, sdk.NewIntFromUint64(10_000*1_000_000))
 
 	var rawCrisisState bytes.Buffer
 	_ = marshaler.Marshal(&rawCrisisState, crisisState)
@@ -151,12 +152,12 @@ func GenerateGovState(denom string) []byte {
 	govState.DepositParams.MinDeposit = sdk.NewCoins(
 		sdk.NewCoin(denom, sdk.NewIntFromUint64(25_000*1_000_000)),
 	)
-	// Set the deposit period to 1 day.
-	oneDay := 24 * time.Hour
-	govState.DepositParams.MaxDepositPeriod = &oneDay
+	// Set the deposit period to 1 hour.
+	oneHour := time.Hour
+	govState.DepositParams.MaxDepositPeriod = &oneHour
 	// Set the voting period to 7 days.
-	oneWeek := 7 * oneDay
-	govState.VotingParams.VotingPeriod = &oneWeek
+	oneDay := 24 * time.Hour
+	govState.VotingParams.VotingPeriod = &oneDay
 
 	var rawGovState bytes.Buffer
 	_ = marshaler.Marshal(&rawGovState, govState)
@@ -177,7 +178,8 @@ func GenerateMintState(denom string) []byte {
 	mintState := mintTypes.DefaultGenesisState()
 
 	mintState.Params.MintDenom = denom
-
+	mintState.Params.InflationRateChange = sdk.MustNewDecFromStr("0.45")
+	mintState.Params.GoalBonded = sdk.MustNewDecFromStr("0.334")
 	// NOTE: This is assuming 6-second block times.
 	mintState.Params.BlocksPerYear = uint64(365.25 * 24 * 60 * 60 / 6)
 
@@ -189,6 +191,11 @@ func GenerateMintState(denom string) []byte {
 
 func GenerateSlashingState() []byte {
 	slashingState := slashingTypes.DefaultGenesisState()
+
+	// NOTE: This is assuming 6-second block times.
+	slashingState.Params.SignedBlocksWindow = int64(24 * 60 * 60 / 6)
+	slashingState.Params.DowntimeJailDuration = 2 * time.Hour
+	slashingState.Params.SlashFractionDowntime = sdk.MustNewDecFromStr("0.001")
 
 	var rawSlashingState bytes.Buffer
 	_ = marshaler.Marshal(&rawSlashingState, slashingState)

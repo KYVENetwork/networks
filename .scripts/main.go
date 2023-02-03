@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	teamTypes "github.com/KYVENetwork/chain/x/team/types"
 	"os"
 	"strconv"
 	"time"
+
+	teamTypes "github.com/KYVENetwork/chain/x/team/types"
 
 	"cosmossdk.io/math"
 	kyveApp "github.com/KYVENetwork/chain/app"
@@ -142,7 +143,11 @@ func main() {
 }
 
 func GenerateConsensusParams() *tmProto.ConsensusParams {
-	return tmTypes.DefaultConsensusParams()
+	consensusParams := tmTypes.DefaultConsensusParams()
+
+	consensusParams.Block.MaxGas = 10_000_000_000
+
+	return consensusParams
 }
 
 func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, error) {
