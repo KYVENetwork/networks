@@ -140,7 +140,11 @@ func main() {
 }
 
 func GenerateConsensusParams() *tmProto.ConsensusParams {
-	return tmTypes.DefaultConsensusParams()
+	consensusParams := tmTypes.DefaultConsensusParams()
+
+	consensusParams.Block.MaxGas = 10_000_000_000
+
+	return consensusParams
 }
 
 func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, error) {
