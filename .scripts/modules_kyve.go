@@ -4,9 +4,8 @@ import (
 	"bytes"
 	"fmt"
 
-	tmOs "github.com/tendermint/tendermint/libs/os"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	tmOs "github.com/tendermint/tendermint/libs/os"
 
 	// Bundles
 	bundlesTypes "github.com/KYVENetwork/chain/x/bundles/types"

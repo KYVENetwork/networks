@@ -9,8 +9,6 @@ import (
 	"strconv"
 	"time"
 
-	teamTypes "github.com/KYVENetwork/chain/x/team/types"
-
 	"cosmossdk.io/math"
 	kyveApp "github.com/KYVENetwork/chain/app"
 	codecTypes "github.com/cosmos/cosmos-sdk/codec/types"
@@ -29,6 +27,8 @@ import (
 	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	// Staking
 	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	// Team
+	teamTypes "github.com/KYVENetwork/chain/x/team/types"
 	// Vesting
 	vestingTypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 )
@@ -164,7 +164,6 @@ func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, err
 	var accounts []*codecTypes.Any
 
 	for _, row := range file[1:] {
-		// [ADDRESS] [AMOUNT]
 		// NOTE: All addresses that aren't parsable are skipped.
 		address, err := sdk.AccAddressFromBech32(row[0])
 		if err != nil {
@@ -215,7 +214,6 @@ func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, e
 	var balances []bankTypes.Balance
 
 	for _, row := range file[1:] {
-		// [ADDRESS] [AMOUNT]
 		// NOTE: All addresses that aren't parsable are treated as module accounts.
 		address, err := sdk.AccAddressFromBech32(row[0])
 		if err != nil {
@@ -277,9 +275,6 @@ func InjectTeamAccounts(chainID string) ([]teamTypes.TeamVestingAccount, error) 
 	var teamAccounts []teamTypes.TeamVestingAccount
 
 	for index, row := range file[1:] {
-		// [ADDRESS] [AMOUNT]
-		// NOTE: All addresses that aren't parsable are treated as module accounts.
-
 		accountId, err := strconv.Atoi(row[0])
 		if err != nil {
 			return nil, err
