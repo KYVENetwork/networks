@@ -66,7 +66,7 @@ echo "3532166eb1605057f633ff577b4fc3e57a6dddc46498c5bc6f2f4e8ab0c756b8  genesis.
 ### Step 5 — Start `cosmovisor`.
 
 ```shell
-cosmovisor start
+cosmovisor run start --home ~/.kaon-1
 ```
 
 <!--
