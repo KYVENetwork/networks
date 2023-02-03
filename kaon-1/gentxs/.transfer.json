@@ -9,7 +9,7 @@
             "coins": [
               {
                 "denom": "tkyve",
-                "amount": "250009000000"
+                "amount": "250012000000"
               }
             ]
           }
@@ -61,7 +61,25 @@
             ]
           },
           {
+            "address": "kyve1xkngxsk8cghytch6m7qje5fejpku0g65u3yjn3",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
             "address": "kyve1kh4jhy975luq2v65rtythmd44y70vwx0460k5s",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
+            "address": "kyve174duylaarqtmku5y689upqjuzzkz8dw9a7qs46",
             "coins": [
               {
                 "denom": "tkyve",
@@ -97,6 +115,15 @@
             ]
           },
           {
+            "address": "kyve1rxmrssz26vxgem43vpqepg4nmp8q2adqp0ql34",
+            "coins": [
+              {
+                "denom": "tkyve",
+                "amount": "1000000"
+              }
+            ]
+          },
+          {
             "address": "kyve1n38xc4rgkg3gusf0k4kpktlure498ynr276alc",
             "coins": [
               {
@@ -114,7 +141,20 @@
     "non_critical_extension_options": []
   },
   "auth_info": {
-    "signer_infos": [],
+    "signer_infos": [
+      {
+        "public_key": {
+          "@type": "/cosmos.crypto.secp256k1.PubKey",
+          "key": "AmRl0i2S22tGbHwz4OdMJZNh9+tiH5IqUh4SB7/cHtOS"
+        },
+        "mode_info": {
+          "single": {
+            "mode": "SIGN_MODE_LEGACY_AMINO_JSON"
+          }
+        },
+        "sequence": "0"
+      }
+    ],
     "fee": {
       "amount": [],
       "gas_limit": "200000",
@@ -123,5 +163,7 @@
     },
     "tip": null
   },
-  "signatures": []
+  "signatures": [
+    "n7E3y0Ejy6m+kdNShqAIov5xVU3/YbdsAmdbogvl7OQjeJeuOHzbctmsCzyYORatkKUciNlSLdrIa0cOfRRvGw=="
+  ]
 }
