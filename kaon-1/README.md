@@ -30,8 +30,9 @@ https://files.kyve.network/chain/v1.0.0-rc0/kyved_linux_arm64.tar.gz)
 
 **NOTE** — This assumes you have [Go](https://go.dev/) on your instance.
 
+<!-- go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest -->
 ```shell
-go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
 ```
 
 ### Step 3 — Initialise `cosmovisor` for Kaon.
@@ -59,7 +60,7 @@ curl https://raw.githubusercontent.com/KYVENetwork/networks/main/kaon-1/genesis.
 
 ```shell
 cd ~/.kaon-1/config
-echo "<hash>  genesis.json" | sha256sum -c
+echo "3532166eb1605057f633ff577b4fc3e57a6dddc46498c5bc6f2f4e8ab0c756b8  genesis.json" | sha256sum -c
 ```
 
 ### Step 5 — Start `cosmovisor`.
