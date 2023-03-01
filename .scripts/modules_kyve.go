@@ -26,9 +26,6 @@ import (
 func GenerateBundlesState() []byte {
 	bundlesState := bundlesTypes.DefaultGenesis()
 
-	bundlesState.Params.StorageCost = 1
-	bundlesState.Params.MaxPoints = 24
-
 	var rawBundlesState bytes.Buffer
 	_ = marshaler.Marshal(&rawBundlesState, bundlesState)
 
