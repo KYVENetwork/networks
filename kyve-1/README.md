@@ -14,7 +14,7 @@ release tag:
 ```shell
 git clone https://github.com/KYVENetwork/chain
 cd chain
-git fetch
+git fetch --tags
 git checkout v1.0.0-rc0
 ```
 
