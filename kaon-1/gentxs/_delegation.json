@@ -4,6 +4,15 @@
       {
         "@type": "/cosmos.staking.v1beta1.MsgDelegate",
         "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1muqzcuesslax3d00s5t0khfvkzy29we3ccpfma",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "6000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
         "validator_address": "kyvevaloper1x5wgh6vwye60wv3dtshs9dmqggwfx2ldk7p0ff",
         "amount": {
           "denom": "tkyve",
@@ -31,10 +40,28 @@
       {
         "@type": "/cosmos.staking.v1beta1.MsgDelegate",
         "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1xkngxsk8cghytch6m7qje5fejpku0g65wpyjan",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "1500000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
         "validator_address": "kyvevaloper1kh4jhy975luq2v65rtythmd44y70vwx0820k6j",
         "amount": {
           "denom": "tkyve",
           "amount": "6000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper174duylaarqtmku5y689upqjuzzkz8dw90wqsmc",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "3000000000000"
         }
       },
       {
@@ -63,6 +90,15 @@
           "denom": "tkyve",
           "amount": "1500000000000"
         }
+      },
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgDelegate",
+        "delegator_address": "kyve1dphuth9k953vnu0dhdsk4sjh0p3hfkgvhgn4n5",
+        "validator_address": "kyvevaloper1rxmrssz26vxgem43vpqepg4nmp8q2adqnlqllh",
+        "amount": {
+          "denom": "tkyve",
+          "amount": "1500000000000"
+        }
       }
     ],
     "memo": "",
@@ -71,7 +107,20 @@
     "non_critical_extension_options": []
   },
   "auth_info": {
-    "signer_infos": [],
+    "signer_infos": [
+      {
+        "public_key": {
+          "@type": "/cosmos.crypto.secp256k1.PubKey",
+          "key": "A4f8mCyhN1uc75VtkXV+qTNR6J019ex+4CBCRanG5sql"
+        },
+        "mode_info": {
+          "single": {
+            "mode": "SIGN_MODE_LEGACY_AMINO_JSON"
+          }
+        },
+        "sequence": "0"
+      }
+    ],
     "fee": {
       "amount": [],
       "gas_limit": "200000",
@@ -80,5 +129,7 @@
     },
     "tip": null
   },
-  "signatures": []
+  "signatures": [
+    "an1mR93Wcfs3HV4vhv16dbTPT3lgehTPKXj5QvXYoWMUj+K3qXJX4J6K55SAu6ClEqUv5SvIPSX57rnuEM0uRA=="
+  ]
 }

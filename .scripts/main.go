@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"cosmossdk.io/math"
@@ -26,6 +27,8 @@ import (
 	genUtilTypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	// Staking
 	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	// Team
+	teamTypes "github.com/KYVENetwork/chain/x/team/types"
 	// Vesting
 	vestingTypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 )
@@ -113,7 +116,7 @@ func main() {
 		GlobalState:     GenerateGlobalState(),
 		PoolState:       GeneratePoolState(),
 		StakersState:    GenerateStakersState(),
-		TeamState:       GenerateTeamState(),
+		TeamState:       GenerateTeamState(*chainID),
 	}
 	rawAppState, _ := json.Marshal(appState)
 
@@ -140,7 +143,11 @@ func main() {
 }
 
 func GenerateConsensusParams() *tmProto.ConsensusParams {
-	return tmTypes.DefaultConsensusParams()
+	consensusParams := tmTypes.DefaultConsensusParams()
+
+	consensusParams.Block.MaxGas = 10_000_000_000
+
+	return consensusParams
 }
 
 func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, error) {
@@ -157,7 +164,6 @@ func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, err
 	var accounts []*codecTypes.Any
 
 	for _, row := range file[1:] {
-		// [ADDRESS] [AMOUNT]
 		// NOTE: All addresses that aren't parsable are skipped.
 		address, err := sdk.AccAddressFromBech32(row[0])
 		if err != nil {
@@ -208,7 +214,6 @@ func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, e
 	var balances []bankTypes.Balance
 
 	for _, row := range file[1:] {
-		// [ADDRESS] [AMOUNT]
 		// NOTE: All addresses that aren't parsable are treated as module accounts.
 		address, err := sdk.AccAddressFromBech32(row[0])
 		if err != nil {
@@ -254,6 +259,63 @@ func InjectGenesisTransactions(chainID string, unsafe bool) (*genUtilTypes.Genes
 	}
 
 	return genUtilTypes.NewGenesisStateFromTx(txEncoder, genTxs), nil
+}
+
+func InjectTeamAccounts(chainID string) ([]teamTypes.TeamVestingAccount, error) {
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/team.csv", chainID))
+	if openErr != nil {
+		return nil, openErr
+	}
+
+	file, readErr := csv.NewReader(rawFile).ReadAll()
+	if readErr != nil {
+		return nil, readErr
+	}
+
+	var teamAccounts []teamTypes.TeamVestingAccount
+
+	for index, row := range file[1:] {
+		accountId, err := strconv.Atoi(row[0])
+		if err != nil {
+			return nil, err
+		}
+		if accountId != index {
+			return nil, fmt.Errorf("account id sequence mismatch: %s", row)
+		}
+
+		amount, err := strconv.ParseUint(row[1], 10, 64)
+		if err != nil {
+			return nil, err
+		}
+
+		commencement, err := time.Parse("2006-01-02", row[2])
+		if err != nil {
+			return nil, err
+		}
+
+		clawbackUnix := int64(0)
+		if len(row[3]) > 0 {
+			clawback, err := time.Parse("2006-01-02", row[3])
+			if err != nil {
+				return nil, err
+			}
+
+			if clawback.Unix() < commencement.Unix() {
+				return nil, fmt.Errorf("clawback can not be before commencment: %s", row)
+			}
+
+			clawbackUnix = clawback.Unix()
+		}
+
+		teamAccounts = append(teamAccounts, teamTypes.TeamVestingAccount{
+			Id:              uint64(accountId),
+			TotalAllocation: amount,
+			Commencement:    uint64(commencement.Unix()),
+			Clawback:        uint64(clawbackUnix),
+		})
+	}
+
+	return teamAccounts, nil
 }
 
 // ValidateAndGetGenTx is inspired by:

@@ -4,13 +4,13 @@ import (
 	"bytes"
 
 	// IBC
-	ibcTypes "github.com/cosmos/ibc-go/v5/modules/core/types"
+	ibcTypes "github.com/cosmos/ibc-go/v6/modules/core/types"
 	// IBC Fee
-	ibcFeeTypes "github.com/cosmos/ibc-go/v5/modules/apps/29-fee/types"
+	ibcFeeTypes "github.com/cosmos/ibc-go/v6/modules/apps/29-fee/types"
 	// IBC Transfer
-	ibcTransferTypes "github.com/cosmos/ibc-go/v5/modules/apps/transfer/types"
+	ibcTransferTypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	// ICA
-	icaTypes "github.com/cosmos/ibc-go/v5/modules/apps/27-interchain-accounts/types"
+	icaTypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/genesis/types"
 )
 
 func GenerateIBCState() []byte {
