@@ -57,14 +57,14 @@ func GenerateGlobalState() []byte {
 	globalState.Params.GasAdjustments = []globalTypes.GasAdjustment{
 		{
 			Type:   sdk.MsgTypeURL(&stakingTypes.MsgCreateValidator{}),
-			Amount: 50_000_000,
+			Amount: BlockMaxGas * 2,
 		},
 		{
 			Type:   sdk.MsgTypeURL(&stakersTypes.MsgCreateStaker{}),
 			Amount: 50_000_000,
 		},
 	}
-	globalState.Params.MinInitialDepositRatio = sdk.MustNewDecFromStr("0.25")
+	globalState.Params.MinInitialDepositRatio = sdk.MustNewDecFromStr("0.50")
 
 	var rawGlobalState bytes.Buffer
 	_ = marshaler.Marshal(&rawGlobalState, globalState)
