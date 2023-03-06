@@ -4,8 +4,8 @@ go 1.20
 
 require (
 	cosmossdk.io/math v1.0.0-beta.3
-	github.com/KYVENetwork/chain v1.0.0-rc0.0.20230215114032-1b19f83a2ffb
-	github.com/cosmos/cosmos-sdk v0.46.9
+	github.com/KYVENetwork/chain v1.0.0-rc0.0.20230302155815-62738bb9549d
+	github.com/cosmos/cosmos-sdk v0.46.10
 	github.com/cosmos/ibc-go/v6 v6.1.0
 	github.com/gogo/protobuf v1.3.3
 	github.com/tendermint/tendermint v0.34.26
@@ -27,7 +27,6 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
 	github.com/bgentry/speakeasy v0.1.1-0.20220910012023-760eaf8b6816 // indirect
-	github.com/btcsuite/btcd v0.22.2 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.2 // indirect
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
@@ -128,11 +127,11 @@ require (
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/crypto v0.5.0 // indirect
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
-	golang.org/x/net v0.5.0 // indirect
+	golang.org/x/net v0.6.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20221014153046-6fdb5e3db783 // indirect
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/term v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/term v0.5.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.102.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
@@ -147,7 +146,7 @@ require (
 
 replace (
 	// use kyve flavored cosmos/cosmos-sdk
-	github.com/cosmos/cosmos-sdk => github.com/KYVENetwork/cosmos-sdk v0.46.9-kyve-rc0
+	github.com/cosmos/cosmos-sdk => github.com/KYVENetwork/cosmos-sdk v0.46.10-kyve-rc0
 
 	// use cosmos flavored gogo/protobuf
 	// https://github.com/cosmos/cosmos-sdk/issues/8469
@@ -155,5 +154,5 @@ replace (
 
 	// use informal flavored tendermint/tendermint
 	// https://github.com/tendermint/tendermint/issues/9972
-	github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.24
+	github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.26
 )
