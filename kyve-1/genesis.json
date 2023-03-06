@@ -30,7 +30,15 @@
         "sig_verify_cost_ed25519": "590",
         "sig_verify_cost_secp256k1": "1000"
       },
-      "accounts": []
+      "accounts": [
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "kyve1zttnm2cl60m5ffsrfeqtzkmtvepl4hwn0dsm68",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        }
+      ]
     },
     "authz": {
       "authorization": []
@@ -47,6 +55,15 @@
             {
               "denom": "ukyve",
               "amount": "165000000000000"
+            }
+          ]
+        },
+        {
+          "address": "kyve1zttnm2cl60m5ffsrfeqtzkmtvepl4hwn0dsm68",
+          "coins": [
+            {
+              "denom": "ukyve",
+              "amount": "1000000"
             }
           ]
         }
@@ -156,7 +173,70 @@
       "forward_relayers": []
     },
     "genutil": {
-      "gen_txs": []
+      "gen_txs": [
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "DSRV",
+                  "identity": "CC434B6FE536F51B",
+                  "website": "https://dsrvlabs.com",
+                  "security_contact": "validator@dsrvlabs.com",
+                  "details": "DSRV is an integrated blockchain solutions company with the mission of enriching the crypto ecosystem via stronger connectivity. We strive to be your gateway to a suite of all-comprehensive blockchain services. Everything distributed, served complete."
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.100000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "kyve1zttnm2cl60m5ffsrfeqtzkmtvepl4hwn0dsm68",
+                "validator_address": "kyvevaloper1zttnm2cl60m5ffsrfeqtzkmtvepl4hwnaasm59",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "doDthi7SYRTDt7eUp2kxrYUA8P7PprlX2ab9nO7Wkbs="
+                },
+                "value": {
+                  "denom": "ukyve",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "100e5f097ebb73ecf0df415e419f3319cfc8458c@167.99.141.216:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "ArQwTYAabnMg6qMvz1Q2N10+5rbhApaw4e2YSYwhnkyC"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            },
+            "tip": null
+          },
+          "signatures": [
+            "nVAKHa/2LiL5SyZTqJMk+t7+8wipcvbfBt6628eUW9dldJiCbOka2RhhMxh5sdHAm6rJFR9/TWIPP4LZC0PLIQ=="
+          ]
+        }
+      ]
     },
     "global": {
       "params": {
