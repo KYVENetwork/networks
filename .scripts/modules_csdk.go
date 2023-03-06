@@ -152,12 +152,12 @@ func GenerateGovState(denom string) []byte {
 	govState.DepositParams.MinDeposit = sdk.NewCoins(
 		sdk.NewCoin(denom, sdk.NewIntFromUint64(25_000*1_000_000)),
 	)
-	// Set the deposit period to 1 hour.
+	// Set the deposit period to 5 minutes.
+	fiveMinutes := 5 * time.Minute
+	govState.DepositParams.MaxDepositPeriod = &fiveMinutes
+	// Set the voting period to 1 hour.
 	oneHour := time.Hour
-	govState.DepositParams.MaxDepositPeriod = &oneHour
-	// Set the voting period to 7 days.
-	oneDay := 24 * time.Hour
-	govState.VotingParams.VotingPeriod = &oneDay
+	govState.VotingParams.VotingPeriod = &oneHour
 
 	var rawGovState bytes.Buffer
 	_ = marshaler.Marshal(&rawGovState, govState)
@@ -175,13 +175,15 @@ func GenerateGroupState() []byte {
 }
 
 func GenerateMintState(denom string) []byte {
-	mintState := mintTypes.DefaultGenesisState()
-
-	mintState.Params.MintDenom = denom
-	mintState.Params.InflationRateChange = sdk.MustNewDecFromStr("0.45")
-	mintState.Params.GoalBonded = sdk.MustNewDecFromStr("0.334")
+	goalBonded := sdk.MustNewDecFromStr("0.334")
 	// NOTE: This is assuming 6-second block times.
-	mintState.Params.BlocksPerYear = uint64(365.25 * 24 * 60 * 60 / 6)
+	blocksPerYear := uint64(365.25 * 24 * 60 * 60 / 6)
+
+	minter := mintTypes.InitialMinter(sdk.ZeroDec())
+	params := mintTypes.NewParams(
+		denom, sdk.ZeroDec(), sdk.ZeroDec(), sdk.ZeroDec(), goalBonded, blocksPerYear,
+	)
+	mintState := mintTypes.NewGenesisState(minter, params)
 
 	var rawMintState bytes.Buffer
 	_ = marshaler.Marshal(&rawMintState, mintState)

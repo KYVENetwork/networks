@@ -142,16 +142,18 @@ func main() {
 	}
 }
 
+const BlockMaxGas = 10_000_000_000
+
 func GenerateConsensusParams() *tmProto.ConsensusParams {
 	consensusParams := tmTypes.DefaultConsensusParams()
 
-	consensusParams.Block.MaxGas = 10_000_000_000
+	consensusParams.Block.MaxGas = BlockMaxGas
 
 	return consensusParams
 }
 
 func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, error) {
-	rawFile, openErr := os.Open(fmt.Sprintf("../%s/accounts.csv", chainID))
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/data/accounts.csv", chainID))
 	if openErr != nil {
 		return nil, openErr
 	}
@@ -201,7 +203,7 @@ func InjectGenesisAccounts(chainID string, denom string) ([]*codecTypes.Any, err
 }
 
 func InjectGenesisBalances(chainID string, denom string) ([]bankTypes.Balance, error) {
-	rawFile, openErr := os.Open(fmt.Sprintf("../%s/accounts.csv", chainID))
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/data/accounts.csv", chainID))
 	if openErr != nil {
 		return nil, openErr
 	}
@@ -262,7 +264,7 @@ func InjectGenesisTransactions(chainID string, unsafe bool) (*genUtilTypes.Genes
 }
 
 func InjectTeamAccounts(chainID string) ([]teamTypes.TeamVestingAccount, error) {
-	rawFile, openErr := os.Open(fmt.Sprintf("../%s/team.csv", chainID))
+	rawFile, openErr := os.Open(fmt.Sprintf("../%s/data/team.csv", chainID))
 	if openErr != nil {
 		return nil, openErr
 	}
