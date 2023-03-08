@@ -73,7 +73,7 @@ func main() {
 
 	chainID := flag.String("chain-id", "kyve-1", "")
 	denom := flag.String("denom", "ukyve", "")
-	dateString := flag.String("start-time", "2023-03-14 09:41:00", "")
+	dateString := flag.String("start-time", "2023-03-14 14:03:14", "")
 	unsafe := flag.Bool("unsafe", false, "")
 	flag.Parse()
 

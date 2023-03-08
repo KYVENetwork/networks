@@ -1208,10 +1208,10 @@
       },
       "params": {
         "mint_denom": "ukyve",
-        "inflation_rate_change": "0.000000000000000000",
+        "inflation_rate_change": "1.000000000000000000",
         "inflation_max": "0.000000000000000000",
         "inflation_min": "0.000000000000000000",
-        "goal_bonded": "0.334000000000000000",
+        "goal_bonded": "0.292000000000000000",
         "blocks_per_year": "5259600"
       }
     },
