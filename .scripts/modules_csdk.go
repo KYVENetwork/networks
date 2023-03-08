@@ -175,13 +175,13 @@ func GenerateGroupState() []byte {
 }
 
 func GenerateMintState(denom string) []byte {
-	goalBonded := sdk.MustNewDecFromStr("0.334")
+	goalBonded := sdk.MustNewDecFromStr("0.292")
 	// NOTE: This is assuming 6-second block times.
 	blocksPerYear := uint64(365.25 * 24 * 60 * 60 / 6)
 
 	minter := mintTypes.InitialMinter(sdk.ZeroDec())
 	params := mintTypes.NewParams(
-		denom, sdk.ZeroDec(), sdk.ZeroDec(), sdk.ZeroDec(), goalBonded, blocksPerYear,
+		denom, sdk.OneDec(), sdk.ZeroDec(), sdk.ZeroDec(), goalBonded, blocksPerYear,
 	)
 	mintState := mintTypes.NewGenesisState(minter, params)
 
