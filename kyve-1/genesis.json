@@ -154,7 +154,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -163,7 +163,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -172,7 +172,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -181,7 +181,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -190,7 +190,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -199,7 +199,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -208,7 +208,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -217,7 +217,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -226,7 +226,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -235,7 +235,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -244,7 +244,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -253,7 +253,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -262,7 +262,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         },
@@ -271,7 +271,7 @@
           "coins": [
             {
               "denom": "ukyve",
-              "amount": "1000000"
+              "amount": "5000000"
             }
           ]
         }
@@ -1409,7 +1409,7 @@
     "staking": {
       "params": {
         "unbonding_time": "1814400s",
-        "max_validators": 100,
+        "max_validators": 14,
         "max_entries": 7,
         "historical_entries": 10000,
         "bond_denom": "ukyve",
