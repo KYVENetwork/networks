@@ -208,7 +208,6 @@ func GenerateSlashingState() []byte {
 func GenerateStakingState(denom string) []byte {
 	stakingState := stakingTypes.DefaultGenesisState()
 
-	stakingState.Params.MaxValidators = 14
 	stakingState.Params.BondDenom = denom
 	stakingState.Params.MinCommissionRate = sdk.MustNewDecFromStr("0.05")
 

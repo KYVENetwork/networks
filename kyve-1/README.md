@@ -1,5 +1,96 @@
 # KYVE Mainnet <sup>v1</sup>
 
+> Genesis validator submissions were closed on Mar 8th, 2023.
+
+## Running a Validator
+
+> IMPORTANT: This guide assumes you've configured your validator
+> instance when submitting a genesis transaction. A complete guide is coming
+> later, post-network launch.
+
+### Step 1 — Upgrade `kyved`.
+
+**NOTE:** If you are building from source, you **DO NOT** need to specify the
+`ENV` variable.
+
+To correctly run your validator, ensure you're using the latest `kyved` binary
+release. Note that you used an outdated binary to submit your genesis
+transactions.
+
+After downloading the prebuilt binaries from the [`v1.0.0`](https://github.com/KYVENetwork/chain/releases/tag/v1.0.0)
+release page or building from source, you can verify that the sha256 hashes match.
+
+`kyved_darwin_amd64.tar.gz` : `4f7ef862d11573ef98879a4463c0cc9cbb021fcedd510875b7123d4aecb56918`\
+`kyved_darwin_arm64.tar.gz` : `cc2b2ee21fbda39961cc9f62ec3e2eac90b1ab42a911906255d674648df863a4`\
+`kyved_linux_amd64.tar.gz` : `f594ead2340f055eec8801a4b38d3849bcd900f3ed820c8962458abfa45dd7ca`\
+`kyved_linux_arm64.tar.gz` : `1f17d4deb5dcef24f4691e57ce621d946238bca455e7dce9f04a4648b3f771ab`
+
+### Step 2 - Verify `kyved`.
+
+You can verify that you are running the correct binary by running the following commands:
+
+```shell
+kyved version
+
+# v1.0.0
+```
+
+```shell
+kyved info
+
+# Information about build variables:
+# Version: v1.0.0
+# Denom: ukyve
+# Team-Foundation-Authority: kyve1xjpl57p7f49y5gueu7rlfytaw9ramcn5zhjy2g
+# Team-BCP-Authority: kyve1fnh4kghr25tppskap50zk5j385pt65tyyjaraa
+# Team-Allocation: 165,000,000.000000
+# Team-TGE: 2023-03-14 15:03:14 +0100 CET
+```
+
+### Step 2 — Install `cosmovisor`.
+
+**NOTE** — This assumes you have [Go](https://go.dev/) on your instance.
+
+```shell
+go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
+```
+
+### Step 3 — Initialise `cosmovisor` for KYVE.
+
+Before initialising, we first need to export some required environment variables:
+
+```shell
+export DAEMON_NAME=kyved
+export DAEMON_HOME=~/.kyve
+```
+
+Now, we can initialise `cosmovisor` using the following command:
+
+```shell
+cosmovisor init <path to kyved>
+```
+
+### Step 4 — Download & verify the KYVE genesis file.
+
+```shell
+curl https://raw.githubusercontent.com/KYVENetwork/networks/main/kyve-1/genesis.json > ~/.kyve/config/genesis.json
+```
+
+**NOTE** — This assumes you have [`sha256sum`](https://linux.die.net/man/1/sha256sum/) on your instance.
+
+```shell
+cd ~/.kyve/config
+echo "1dc3ec916f49ef8c221851566aca12a3f914b23afb3ab35067fc8a8d5f59c2ee  genesis.json" | sha256sum -c
+```
+
+### Step 5 — Start `cosmovisor`.
+
+```shell
+cosmovisor run start
+```
+
+<!--
+
 ## Becoming a Genesis Validator
 
 ### Step 1 — Install `kyved`.
@@ -126,3 +217,5 @@ can obtain your validator address with the following command (it will be in the
 ```shell
 kyved debug addr <address>
 ```
+
+-->
