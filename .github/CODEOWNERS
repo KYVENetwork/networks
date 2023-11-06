@@ -1,15 +1,3 @@
 # https://help.github.com/articles/about-codeowners
 
-* @johnletey
-
-# CODEOWNERS for KYVE
-
-/kyve-1 @johnletey @mbreithecker
-
-# CODEOWNERS for Kaon
-
-/kaon-1 @johnletey @mbreithecker
-
-# CODEOWNERS for Korellia
-
-/korellia @mbreithecker
+* @mbreithecker @troykessler
